@@ -1,56 +1,9 @@
-* {
-  margin: 0;
-  padding: 5px;
-  box-sizing: border-box;
+.red{
+  background-color: red;
 }
-#flex {
-  display: flex;
-  justify-content: space-around;
+.yellow{
+  background-color: yellow;
 }
-#title {
-  text-align: center;
-  margin-top: 20px;
-  font-size: 50px;
-  color: yellowgreen;
-}
-#title-highlight {
-  color: green;
-}
-#text {
-  margin-top: 20px;
-  font-size: 30px;
-  color: blue;
-}
-#container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-a {
-  text-decoration: none;
-  color: black;
-}
-.item {
-  font-size: 20px;
-  padding: 5px;
-  width: 350px;
-  color: royalblue;
-  background-color: lightgray;
-  margin-bottom: 5px;
-  border: none;
-  border-radius: 30px;
-}
-.item:hover {
-  background-color: gray;
-  color: white;
-  cursor: pointer;
-}
-.width {
-  cursor: pointer;
-  background: rgb(204, 202, 202);
-  border-radius: 40px;
-  padding: 20px;
-  max-width: 500px;
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  color: blueviolet;
+.blue{
+  background-color: blue;
 }
