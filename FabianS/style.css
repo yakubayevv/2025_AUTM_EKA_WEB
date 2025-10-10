@@ -3,7 +3,7 @@
 }
 
 #blue {
-    background-color: blue;
+    background-color: green;
 } 
 
 #green {
@@ -20,4 +20,5 @@
 
 .text_container {
     color: black;
+    text-align: center;
 }
