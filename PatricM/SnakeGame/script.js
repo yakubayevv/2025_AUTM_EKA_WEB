@@ -9,7 +9,7 @@ myCarrot.src = "img/carrot.png";
 let box = 32;
 let food_coords = {
     x: (Math.trunc(17*Math.random())+1)*box,
-    y: 10*box, 
+    y: (Math.trunc(15*Math.random())+3)*box, 
     type: "carrot"
 }
 
