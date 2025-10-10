@@ -27,10 +27,14 @@ let food_coords = {
     // Es hat 17 Felder, daher 17. 
     // Math. random liefert einen Wert zwischen 0 ... 1 
     // Da ich ab dem ersten Feld starten möchte die + 1
-    x: (Math.trunc(17 * Math.random()) + 1) * box,
-    // y: (Math.trunc(15 * Math.random()) + 3) * box, 
+    x: (
+        Math.trunc(
+            17 * Math.random()
+        ) + 1) * box,
 
-    y: getRandomInt(3, 17)*box, 
+    y: (
+        Math.trunc(15 * Math.random()
+    ) + 3) * box, 
     type: "carrot"
 }
 
