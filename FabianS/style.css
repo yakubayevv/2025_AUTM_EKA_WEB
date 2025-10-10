@@ -21,4 +21,5 @@
 .text_container {
     color: black;
     text-align: center;
+    text-transform: uppercase;
 }
