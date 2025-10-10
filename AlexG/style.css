@@ -1,10 +1,5 @@
 block1{
 background-color: aquamarine;
-#h1 {
-font-style: italic;
-background-color: chocolate;
-color: white;
-}
 }
 
 block2{
@@ -14,7 +9,6 @@ background-color: sandybrown;
 
 
 h1 {
-font-style: italic;
 background-color: chocolate;
 color: white;
 }
@@ -22,8 +16,4 @@ color: white;
 h2 {
     background-color: rgb(19, 196, 196);
     color: green;
-}
-
-p {
-    color: black;
 }
