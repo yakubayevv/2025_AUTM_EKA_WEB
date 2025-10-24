@@ -1,3 +1,10 @@
+
+// /////////////////////
+// Change between Klick or autmatic run
+// /////////////////////
+let automatic_run= true
+
+
 const canvas = document.getElementById("game"); //refering to the canvas element in html file
 const ctx = canvas.getContext("2d"); //enables us to use some tools for drawing such like fillRect, drawImage etc. 
 
@@ -7,12 +14,21 @@ let dir = ""
 let counter = 0;
 let box = 32;
 let snake = []
+snake[0] = {
+    x: 9 * box,
+    y:  10 * box
+}
 let newHead = {
     x: 0,
     y: 0
 }
-let automatic_run= false
-let food_coords = ""
+let food_coords = {
+    //(Math.trunc(17*Math.random())+1)*box,
+    x: x_val() * box,
+    //(Math.trunc(15*Math.random())+3)*box, 
+    y: y_val() * box,
+    type: "carrot"
+}
 let can_move = false 
 let points = 0
 
@@ -31,18 +47,9 @@ myCarrot.src = "img/carrot.png";
 
 
 
-food_coords = {
-    //(Math.trunc(17*Math.random())+1)*box,
-    x: x_val() * box,
-    //(Math.trunc(15*Math.random())+3)*box, 
-    y: y_val() * box,
-    type: "carrot"
-}
 
-snake[0] = {
-    x: 9 * box,
-    y:  10 * box
-}
+
+
 
 
 function drawGame(){ // the function for drawing the game
@@ -145,23 +152,10 @@ function is_documented(new_x, new_y) {
 
 function check_if_snake_is_on_boarder(newHead){
     console.log( 
-         canvas.width / box,
-
-         canvas.height
+        canvas.width * box,
+        newHead * box,
+        canvas.height * box
     )
-    if(
-        snake[0].x < 0 
-        || snake[0].x >= 
-        // canvas.width / box
-        18 * box
-        || snake[0].y < 0 
-        || snake[0].y >= 
-        // canvas.height / box
-        18 * box
-    ){
-        clearInterval(myGame)
-    }
-
     if(
         newHead.x < 0 
         || newHead.x > 18 * box
