@@ -15,34 +15,29 @@ let food_coords = {
 
 let snakeX = 0;
 let snakeY = 0;
+let dir = "";
 
 let snake = [];
 snake[0] = {
     x: 9*box,
     y: 10*box
 }
-snake[1] = {
-    x: 8*box,
-    y: 10*box
-}
-snake[2] = {
-    x: 8*box,
-    y: 11*box
-}
-snake[3] = {
-    x: 7*box,
-    y: 11*box
-}
 
-snake[4] = {
-    x: 7*box,
-    y: 12*box
-}
+document.addEventListener("keypress", (event) =>{
+    if(event.key == "w" && dir != "down") {
+        dir = "up";
+    }
+    if(event.key == "s" && dir != "up") {
+        dir = "down";
+    }
+    if(event.key == "a" && dir != "right") {
+        dir = "left";
+    }
+    if(event.key == "d" && dir != "left") {
+        dir = "right";
+    }
+})
 
-
-
-// snake.unshift(newHead)
-// snake.pop()
 
 function drawGame(){ // the function for drawing the game
     ctx.drawImage(myPlayground, 0, 0);
@@ -54,9 +49,27 @@ function drawGame(){ // the function for drawing the game
 
     snakeX = snake[0].x;
     snakeY = snake[0].y;
-    snakeY -= box;
 
-    snake.pop();
+    if(dir == "right") snakeX += box;
+    if(dir == "up") snakeY -= box;
+    if(dir == "left") snakeX -= box;
+    if(dir == "down") snakeY += box;
+
+    //if the food is eaten
+    if(snakeX == food_coords.x && snakeY == food_coords.y){
+        food_coords = {
+            x: (Math.trunc(17*Math.random())+1)*box,
+            y: (Math.trunc(15*Math.random())+3)*box, 
+            type: "carrot"
+        }
+    } else {
+        snake.pop();
+    }
+
+    if(snakeX < 0 || snakeX > 18*box){
+        clearInterval(myGame);
+    }
+   
 
     let newHead = {
         x: snakeX,
