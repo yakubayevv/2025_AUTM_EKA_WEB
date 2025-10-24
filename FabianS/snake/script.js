@@ -45,7 +45,108 @@ function x_val(){
 myPlayground.src = "img/ground.png"; // we set the property src equal to the path to the file we want to diplay 
 myCarrot.src = "img/carrot.png";
 
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+// Functions logical
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+function is_documented(new_x, new_y) {
+    let found = snake.find(element =>
+        element.x === new_x && element.y === new_y
+    );
+    is_doc = found ? true : false
+    console.log("Gefunden:", is_doc);
+    return is_doc;
+}
 
+function check_if_snake_is_on_boarder(newHead){
+    console.log( 
+        canvas.width * box,
+        newHead * box,
+        canvas.height * box
+    )
+    if(
+        newHead.x < 0 
+        || newHead.x > 18 * box
+        || newHead.y < 0 
+        || newHead.y > 18 * box
+    ){
+        clearInterval(myGame)
+    }
+}
+
+function move_snake(){
+    console.log(can_move, dir)
+    if(
+        dir == "up"
+    ){
+        newHead={
+            x: snake[0].x ,
+            y: snake[0].y - box
+        }
+    }
+    if(
+        dir == "down"
+    ){
+            newHead={
+            x: snake[0].x ,
+            y: snake[0].y + box
+        }
+    }
+    if(
+        dir == "left"
+    ){
+            newHead={
+            x: snake[0].x - box,
+            y: snake[0].y 
+        }
+            }
+    if(
+        dir == "right"
+    ){
+        newHead={
+            x: snake[0].x + box,
+            y: snake[0].y 
+        }
+    }
+    if (can_move){
+        check_if_snake_is_on_boarder(newHead)
+        snake.unshift(newHead)
+    }
+}
+
+function check_if_its_eaten(){
+    
+    if(
+        // can_move && 
+        food_coords.x == snake[0].x && food_coords.y == snake[0].y
+    ){
+        new_x = x_val() * box
+        new_y = y_val() * box
+        while(is_documented(new_x, new_y)){
+            console.log("new Position")
+            new_x = x_val() * box
+            new_y = y_val() * box
+        }
+        points++
+        val = is_documented()
+        console.log(val)
+        food_coords = {
+            //(Math.trunc(17*Math.random())+1)*box,
+            x: x_val() * box,
+            //(Math.trunc(15*Math.random())+3)*box, 
+            y: y_val() * box,
+            type: "carrot"
+        }
+
+    }
+    else{
+        console.log("it's unequal")
+        if(can_move){
+            snake.pop()
+        }
+    }
+}
+
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
@@ -138,104 +239,4 @@ document.addEventListener('keydown', function(event){
         move_snake()
         check_if_its_eaten()
     }
-    
 });
-
-function is_documented(new_x, new_y) {
-    let found = snake.find(element =>
-        element.x === new_x && element.y === new_y
-    );
-    is_doc = found ? true : false
-    console.log("Gefunden:", is_doc);
-    return is_doc;
-}
-
-function check_if_snake_is_on_boarder(newHead){
-    console.log( 
-        canvas.width * box,
-        newHead * box,
-        canvas.height * box
-    )
-    if(
-        newHead.x < 0 
-        || newHead.x > 18 * box
-        || newHead.y < 0 
-        || newHead.y > 18 * box
-    ){
-        clearInterval(myGame)
-    }
-}
-
-function move_snake(){
-    console.log(can_move, dir)
-    if(
-        dir == "up"
-    ){
-        console.log('Pfeil nach oben gedrückt');
-        newHead={
-            x: snake[0].x ,
-            y: snake[0].y - box
-        }
-    }
-    if(
-        dir == "down"
-    ){
-        console.log('Pfeil nach unten gedrückt');
-            newHead={
-            x: snake[0].x ,
-            y: snake[0].y + box
-        }
-    }
-    if(
-        dir == "left"
-    ){
-        console.log('Pfeil nach links gedrückt');
-            newHead={
-            x: snake[0].x - box,
-            y: snake[0].y 
-        }
-            }
-    if(
-        dir == "right"
-    ){
-        console.log('Pfeil nach rechts gedrückt');
-        newHead={
-            x: snake[0].x + box,
-            y: snake[0].y 
-        }
-    }
-    if (can_move){
-        check_if_snake_is_on_boarder(newHead)
-        snake.unshift(newHead)
-    }
-}
-
-function check_if_its_eaten(){
-    
-    if(
-        // can_move && 
-        food_coords.x == snake[0].x && food_coords.y == snake[0].y
-    ){
-        new_x = x_val() * box
-        new_y = y_val() * box
-        while(is_documented(new_x, new_y)){
-            console.log("new Position")
-            new_x = x_val() * box
-            new_y = y_val() * box
-        }
-        points++
-        food_coords = {
-            //(Math.trunc(17*Math.random())+1)*box,
-            x: x_val() * box,
-            //(Math.trunc(15*Math.random())+3)*box, 
-            y: y_val() * box,
-            type: "carrot"
-        }
-    }
-    else{
-        console.log("it's unequal")
-        if(can_move){
-            snake.pop()
-        }
-    }
-}
