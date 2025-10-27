@@ -2,7 +2,8 @@
 // /////////////////////
 // Change between Klick or autmatic run
 // /////////////////////
-let automatic_run= true
+// let automatic_run= false
+let automatic_run= true 
 
 
 const canvas = document.getElementById("game"); //refering to the canvas element in html file
@@ -53,16 +54,18 @@ function is_documented(new_x, new_y) {
         element.x === new_x && element.y === new_y
     );
     is_doc = found ? true : false
-    console.log("Gefunden:", is_doc);
+    // console.log("Gefunden:", is_doc);
     return is_doc;
 }
 
+function check_self_collision(newHead){
+    result = is_documented(newHead.x, newHead.y) 
+    if(result && !can_move){
+        clearInterval(myGame)
+    }
+    console.log(result)
+}
 function check_if_snake_is_on_boarder(newHead){
-    console.log( 
-        canvas.width * box,
-        newHead * box,
-        canvas.height * box
-    )
     if(
         newHead.x < 0 
         || newHead.x > 18 * box
@@ -71,10 +74,10 @@ function check_if_snake_is_on_boarder(newHead){
     ){
         clearInterval(myGame)
     }
+    check_self_collision(newHead)
 }
 
 function move_snake(){
-    console.log(can_move, dir)
     if(
         dir == "up"
     ){
@@ -83,6 +86,7 @@ function move_snake(){
             y: snake[0].y - box
         }
     }
+
     if(
         dir == "down"
     ){
@@ -91,6 +95,7 @@ function move_snake(){
             y: snake[0].y + box
         }
     }
+
     if(
         dir == "left"
     ){
@@ -98,7 +103,8 @@ function move_snake(){
             x: snake[0].x - box,
             y: snake[0].y 
         }
-            }
+    }
+
     if(
         dir == "right"
     ){
@@ -107,6 +113,8 @@ function move_snake(){
             y: snake[0].y 
         }
     }
+
+
     if (can_move){
         check_if_snake_is_on_boarder(newHead)
         snake.unshift(newHead)
@@ -116,8 +124,9 @@ function move_snake(){
 function check_if_its_eaten(){
     
     if(
-        // can_move && 
-        food_coords.x == snake[0].x && food_coords.y == snake[0].y
+        food_coords.x == snake[0].x 
+        &&  
+        food_coords.y == snake[0].y
     ){
         new_x = x_val() * box
         new_y = y_val() * box
@@ -127,19 +136,15 @@ function check_if_its_eaten(){
             new_y = y_val() * box
         }
         points++
-        val = is_documented()
-        console.log(val)
+        val = is_documented(new_x, new_y)
         food_coords = {
-            //(Math.trunc(17*Math.random())+1)*box,
             x: x_val() * box,
-            //(Math.trunc(15*Math.random())+3)*box, 
             y: y_val() * box,
             type: "carrot"
         }
 
     }
     else{
-        console.log("it's unequal")
         if(can_move){
             snake.pop()
         }
@@ -156,10 +161,10 @@ function check_if_its_eaten(){
 function drawGame(){ // the function for drawing the game
     ctx.drawImage(myPlayground, 0, 0);
     ctx.drawImage(myCarrot, food_coords.x, food_coords.y);
-    ctx.fillStyle = "#305CDE";
-
+    ctx.fillStyle = "white";
     ctx.font = "50px serif";
     ctx.fillText("Points:" + points, box, 1.5 * box)
+    ctx.fillStyle = "#305CDE";
 
     for(let c = 0; c < snake.length; c++){
         ctx.fillRect(snake[c].x, snake[c].y, box, box);
@@ -189,8 +194,7 @@ document.addEventListener('keydown', function(event){
             ||
             event.key === "w"
         )
-        &&         dir != "down"
-        // && snake.length > 1
+        && dir != "down"
     ){
         dir = "up"
         can_move = true
@@ -203,7 +207,6 @@ document.addEventListener('keydown', function(event){
             event.key === "s"
         )
         && dir != "up"
-        // && snake.length > 1
     ){
         dir = "down"
         can_move = true
@@ -215,8 +218,7 @@ document.addEventListener('keydown', function(event){
             ||
             event.key === "a"
         )
-        &&         dir != "right"
-        // && snake.length > 1
+        && dir != "right"
     ){
         dir = "left"
         can_move = true
@@ -228,8 +230,7 @@ document.addEventListener('keydown', function(event){
             ||
             event.key === "d"       
         )
-        &&         dir != "left"
-        // && snake.length > 1
+        && dir != "left"
     ){
         dir = "right"
         can_move = true
