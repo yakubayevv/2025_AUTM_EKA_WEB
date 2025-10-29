@@ -1,7 +1,8 @@
 
-// /////////////////////
-// Change between Klick or autmatic run
-// /////////////////////
+
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+// % Change between Klick or autmatic run %
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 // let automatic_run= false
 let automatic_run= true 
 
@@ -15,6 +16,7 @@ let dir = ""
 let counter = 0;
 let box = 32;
 let snake = []
+let game_is_running = true
 snake[0] = {
     x: 9 * box,
     y:  10 * box
@@ -46,9 +48,9 @@ function x_val(){
 myPlayground.src = "img/ground.png"; // we set the property src equal to the path to the file we want to diplay 
 myCarrot.src = "img/carrot.png";
 
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 // Functions logical
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function is_documented(new_x, new_y) {
     let found = snake.find(element =>
         element.x === new_x && element.y === new_y
@@ -60,8 +62,12 @@ function is_documented(new_x, new_y) {
 
 function check_self_collision(newHead){
     result = is_documented(newHead.x, newHead.y) 
-    if(result && !can_move){
-        clearInterval(myGame)
+    if(
+        result 
+        // && !can_move
+    ){
+        game_is_running = false
+        // clearInterval(myGame)
     }
     console.log(result)
 }
@@ -72,7 +78,8 @@ function check_if_snake_is_on_boarder(newHead){
         || newHead.y < 0 
         || newHead.y > 18 * box
     ){
-        clearInterval(myGame)
+        game_is_running = false
+        // clearInterval(myGame)
     }
     check_self_collision(newHead)
 }
@@ -115,7 +122,7 @@ function move_snake(){
     }
 
 
-    if (can_move){
+    if ( can_move){
         check_if_snake_is_on_boarder(newHead)
         snake.unshift(newHead)
     }
@@ -164,6 +171,11 @@ function drawGame(){ // the function for drawing the game
     ctx.fillStyle = "white";
     ctx.font = "50px serif";
     ctx.fillText("Points:" + points, box, 1.5 * box)
+    
+    ctx.fillStyle = game_is_running ? "white" : "red";
+    ctx.fillText(game_is_running ? "" : "Game Over", 11 * box, 1.5*box)
+    console.log("Game is Runing:", game_is_running ? "" : "Game Over" && clearInterval(myGame))
+    // game_is_running ? "" : clearInterval(myGame)
     ctx.fillStyle = "#305CDE";
 
     for(let c = 0; c < snake.length; c++){
@@ -171,7 +183,7 @@ function drawGame(){ // the function for drawing the game
     }
 
     // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    // IF you want continue walk
+    // % IF you want continue walk %
     // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     if(automatic_run){
         move_snake()
