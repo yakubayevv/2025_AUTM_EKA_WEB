@@ -17,6 +17,9 @@ let counter = 0;
 let box = 32;
 let snake = []
 let game_is_running = true
+let press_key = false
+let pop_snake = false 
+
 snake[0] = {
     x: 9 * box,
     y:  10 * box
@@ -52,15 +55,19 @@ myCarrot.src = "img/carrot.png";
 // Functions logical
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function is_documented(new_x, new_y) {
+    console.log("is_documented")
     let found = snake.find(element =>
         element.x === new_x && element.y === new_y
     );
     is_doc = found ? true : false
-    // console.log("Gefunden:", is_doc);
+    if(is_doc){
+        pop_snake = false
+    }
     return is_doc;
 }
 
 function check_self_collision(newHead){
+    console.log("check_self_collision")
     result = is_documented(newHead.x, newHead.y) 
     if(
         result 
@@ -72,6 +79,7 @@ function check_self_collision(newHead){
     console.log(result)
 }
 function check_if_snake_is_on_boarder(newHead){
+    console.log("check_if_snake_is_on_boarder")
     if(
         newHead.x < 0 
         || newHead.x > 18 * box
@@ -79,12 +87,13 @@ function check_if_snake_is_on_boarder(newHead){
         || newHead.y > 18 * box
     ){
         game_is_running = false
-        // clearInterval(myGame)
+        pop_snake = false
     }
     check_self_collision(newHead)
 }
 
 function move_snake(){
+    console.log("move snake")
     if(
         dir == "up"
     ){
@@ -97,7 +106,7 @@ function move_snake(){
     if(
         dir == "down"
     ){
-            newHead={
+        newHead={
             x: snake[0].x ,
             y: snake[0].y + box
         }
@@ -122,14 +131,17 @@ function move_snake(){
     }
 
 
-    if ( can_move){
+    if (can_move){
         check_if_snake_is_on_boarder(newHead)
         snake.unshift(newHead)
+        if(pop_snake){
+            snake.pop()
+            pop_snake = false
+        }
     }
 }
 
 function check_if_its_eaten(){
-    
     if(
         food_coords.x == snake[0].x 
         &&  
@@ -145,15 +157,16 @@ function check_if_its_eaten(){
         points++
         val = is_documented(new_x, new_y)
         food_coords = {
-            x: x_val() * box,
-            y: y_val() * box,
+            x: new_x ,
+            y: new_y ,
             type: "carrot"
         }
 
     }
     else{
-        if(can_move){
-            snake.pop()
+        if(press_key){
+            // snake.pop()
+            pop_snake = true
         }
     }
 }
@@ -166,6 +179,7 @@ function check_if_its_eaten(){
 
 
 function drawGame(){ // the function for drawing the game
+    console.log(counter++)
     ctx.drawImage(myPlayground, 0, 0);
     ctx.drawImage(myCarrot, food_coords.x, food_coords.y);
     ctx.fillStyle = "white";
@@ -186,8 +200,8 @@ function drawGame(){ // the function for drawing the game
     // % IF you want continue walk %
     // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     if(automatic_run){
-        move_snake()
         check_if_its_eaten()
+        move_snake()
     }
 
 }
@@ -197,9 +211,7 @@ function drawGame(){ // the function for drawing the game
 let myGame = setInterval(drawGame, 100) 
 
 document.addEventListener('keydown', function(event){
-    // Überprüfen der Taste mit event.key
-    can_move = false
-    console.log(counter++)
+    press_key = true
     if (
         (
             event.key === 'ArrowUp' 
