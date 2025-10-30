@@ -19,7 +19,7 @@ let food_coords = {
 
 let snakeX = 0;
 let snakeY = 0;
-let dir = "";
+let dir = "wait";
  
 
     
@@ -74,9 +74,15 @@ function drawGame() {
         snake.pop();
     }
 
-    if(snakeX < 0){
-        clearInterval(myGame);
-    }
+    if (
+    snakeX < box || 
+    snakeX > 18 * box ||
+    snakeY < 2 * box ||
+    snakeY > 18 * box
+) {
+    clearInterval(myGame);
+    alert("💀 GAME OVER!");
+}
 
     let newHead = {
         x: snakeX,
