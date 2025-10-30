@@ -19,7 +19,7 @@ let food_coords = {
 
 let snakeX = 0;
 let snakeY = 0;
-let dir = "right";
+let dir = "wait";
  
 
     
