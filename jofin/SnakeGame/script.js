@@ -1,44 +1,92 @@
-const canvas = document.getElementById("game"); 
-const ctx = canvas.getContext("2d"); 
+const canvas = document.getElementById("game"); //refering to the canvas element in html file
+const ctx = canvas.getContext("2d"); //enables us to use some tools for drawing such like fillRect, drawImage etc. 
 
-let myPlayground = new Image(); 
-myPlayground.src = "img/ground.png"; 
-
+let myPlayground = new Image(); // create an empty Image object
+myPlayground.src = "img/ground.png"; // we set the property src equal to the path to the file we want to diplay 
 let myCarrot = new Image();
 myCarrot.src = "img/carrot.png";
 
-let myWatermelon = new Image();
-myWatermelon.src = "img/watermelon.png";
-
-let box = 32; // Only declare once!
-
-// Only one food object is needed for the current food item
+let box = 32;
 let food_coords = {
-    type: Math.random() < 0.5 ? "carrot" : "watermelon",
-};
-
-// Function to generate new, random coordinates for the food
-function generateFoodPosition() {
-    food_coords.x = (Math.trunc(17 * Math.random()) + 1) * box;
-    food_coords.y = (Math.trunc(12 * Math.random()) + 3) * box;
+    x: (Math.trunc(17*Math.random())+1)*box,
+    y: (Math.trunc(15*Math.random())+3)*box, 
+    type: "carrot"
 }
 
-// Set the initial position
-generateFoodPosition();
+let snakeX = 0;
+let snakeY = 0;
+let dir = "";
+let score = 0;
 
-function drawGame(){ 
-    // 1. Draw the background
-    ctx.drawImage(myPlayground, 0, 0);
+let snake = [];
+snake[0] = {
+    x: 9*box,
+    y: 10*box
+}
 
-    // 2. Draw the correct food item based on its type
-    if (food_coords.type === "carrot") {
-        ctx.drawImage(myCarrot, food_coords.x, food_coords.y);
-    } else if (food_coords.type === "watermelon") {
-        ctx.drawImage(myWatermelon, food_coords.x, food_coords.y);
+document.addEventListener("keypress", (event) =>{
+    if(event.key == "w" && dir != "down") {
+        dir = "up";
     }
-    
-    // NOTE: You would typically have code here to draw your snake/player
-    // and check for collisions with the food.
+    if(event.key == "s" && dir != "up") {
+        dir = "down";
+    }
+    if(event.key == "a" && dir != "right") {
+        dir = "left";
+    }
+    if(event.key == "d" && dir != "left") {
+        dir = "right";
+    }
+})
+
+
+function drawGame(){ // the function for drawing the game
+    ctx.drawImage(myPlayground, 0, 0);
+    ctx.drawImage(myCarrot, food_coords.x, food_coords.y);
+    ctx.fillStyle = "white";
+    ctx.font = "50px serif";
+    ctx.fillText("Points: " + score, 1*box, 1.7*box);
+    ctx.fillStyle = "#FFE607";
+    for(let i = 0; i < snake.length; i++){
+        ctx.fillRect(snake[i].x, snake[i].y, box, box);
+    }
+
+    snakeX = snake[0].x;
+    snakeY = snake[0].y;
+
+    if(dir == "right") snakeX += box;
+    if(dir == "up") snakeY -= box;
+    if(dir == "left") snakeX -= box;
+    if(dir == "down") snakeY += box;
+
+    //if the food is eaten
+    if(snakeX == food_coords.x && snakeY == food_coords.y){
+        food_coords = {
+            x: (Math.trunc(17*Math.random())+1)*box,
+            y: (Math.trunc(15*Math.random())+3)*box, 
+            type: "carrot"
+        }
+        score++;
+    } else {
+        snake.pop();
+    }
+
+    if(snakeX < 0 || snakeX > 18*box){
+        clearInterval(myGame);
+    }
+
+    // if (snakeX < 0) {
+    //     snakeX = 17*box;
+    // }
+   
+
+    let newHead = {
+        x: snakeX,
+        y: snakeY
+    }
+
+    snake.unshift(newHead);
+
 }
 
-let myGame = setInterval(drawGame, 100);
+let myGame = setInterval(drawGame, 100) // we create a refresh of the scene each 100 ms, each 100 ms the funciton drawGame will be used
