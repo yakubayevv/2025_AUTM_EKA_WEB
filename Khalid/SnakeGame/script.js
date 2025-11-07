@@ -16,7 +16,7 @@ let food_coords = {
 let snakeX = 0;
 let snakeY = 0;
 let dir = "";
-let SCORE =0;
+let score = 0;
 
 let snake = [];
 snake[0] = {
@@ -43,6 +43,9 @@ document.addEventListener("keypress", (event) =>{
 function drawGame(){ // the function for drawing the game
     ctx.drawImage(myPlayground, 0, 0);
     ctx.drawImage(myCarrot, food_coords.x, food_coords.y);
+    ctx.fillStyle = "white";
+    ctx.font = "50px serif";
+    ctx.fillText("Points: " + score, 1*box, 1.7*box);
     ctx.fillStyle = "#FFE607";
     for(let i = 0; i < snake.length; i++){
         ctx.fillRect(snake[i].x, snake[i].y, box, box);
@@ -63,16 +66,18 @@ function drawGame(){ // the function for drawing the game
             y: (Math.trunc(15*Math.random())+3)*box, 
             type: "carrot"
         }
-    } 
-    
-    else {
+        score++;
+    } else {
         snake.pop();
     }
 
-    if(snakeX < 1 || snakeX > 17*box){
+    if(snakeX < 0 || snakeX > 18*box){
         clearInterval(myGame);
     }
-    
+
+    // if (snakeX < 0) {
+    //     snakeX = 17*box;
+    // }
    
 
     let newHead = {
