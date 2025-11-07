@@ -46,7 +46,9 @@ document.addEventListener("keypress", (event) =>{
 
 function drawGame(){ // the function for drawing the game
     ctx.drawImage(myPlayground, 0, 0);
-    ctx.drawImage(myCherry, food_coords.x, food_coords.y);
+    if (food_coords.type === "cherry") ctx.drawImage(myCherry, food_coords.x, food_coords.y);
+    else if (food_coords.type === "lemon") ctx.drawImage(myLemon, food_coords.x, food_coords.y);
+    else if (food_coords.type === "watermelon") ctx.drawImage(myWatermelom, food_coords.x, food_coords.y);
     ctx.fillStyle = "white";
     ctx.font = "50px serif";
     ctx.fillText("Points: " + score, 1*box, 1.7*box);
@@ -65,10 +67,12 @@ function drawGame(){ // the function for drawing the game
 
     // if the food is eaten
     if(snakeX == food_coords.x && snakeY == food_coords.y){
+        const foodTypes = ["cherry", "lemon", "watermelon"];
+        const randomType = foodTypes[Math.floor(Math.random()* foodTypes.length)]
         food_coords = {
             x: (Math.trunc(17*Math.random())+1)*box,
             y: (Math.trunc(15*Math.random())+3)*box, 
-            type: "cherry"
+            type: randomType
         }
         score++;
     } else {
