@@ -17,7 +17,8 @@
     transform: 
         rotateY(deg) 
         rotateX(degY) 
-        rotateZ(0deg);
+        rotateZ(degZ);
+        /* rotateZ(0deg); */
 }
 
 
