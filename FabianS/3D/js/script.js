@@ -17,30 +17,48 @@ let drz = 0;
 // Functions logical
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 document.addEventListener("keydown", (event) =>{
-    if(event.key == "ArrowUp"){
+    if(
+        event.key == "ArrowUp"
+        || 
+        event.key == "w"
+    ){
         drx++;
         // world.style.transform = `rotateX(${drx}deg)`
         console.log("up")
     }
     
-    if(event.key == "ArrowDown"){
+    if(
+        event.key == "ArrowDown"
+        || 
+        event.key == "s"
+    ){
         drx--;
         // world.style.transform = `rotateX(${drx}deg)`
         console.log("up")
     }
 
-    if(event.key == "ArrowLeft"){
+    if(
+        event.key == "ArrowLeft"
+        || 
+        event.key == "a"
+    ){
         dry--;
         // world.style.transform = `rotateY(${dry}deg)`
     }
 
-    if(event.key == "ArrowRight"){
+    if(
+        event.key == "ArrowRight"
+        || 
+        event.key == "d"
+    ){
         dry++;
         // world.style.transform = `rotateY(${dry}deg)`
         console.log("up")
     }
 
-    if(event.key == "Space"){
+    if(
+        event.key == "Space"
+    ){
         // world.style.transform = `rotateY(${dry}deg)`
         drz++
     }
