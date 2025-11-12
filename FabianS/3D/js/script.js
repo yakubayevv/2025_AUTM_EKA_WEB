@@ -166,6 +166,6 @@ document.addEventListener("keydown", (event) =>{
         translateZ(${move}px)
     `;
         // translateY(${move}px)
-
+    // IF-Abfrage inwieweit
 })
 
