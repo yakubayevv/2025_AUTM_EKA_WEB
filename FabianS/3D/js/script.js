@@ -7,6 +7,7 @@
 let drx = 0;
 let dry = 0
 let drz = 0;
+let move = 0;
 let mySquares = []
 
 var world = document.getElementById("world");
@@ -25,10 +26,23 @@ let squares = [
 
 let myRoom = [
     // ,    ,       Length, Winkelx,Winkely,Winkelz,    X,      Y,      color,      ,        
+    
+    // Floor
     [0,     100,    0,      90,     0,      0,          2000,   2000,   "brown",    1,  "url('textures/floor_01.jpg')"],
+    
+    // Wall 1
     [0,     100,    -1000,  0,      0,      0,          2000,   400,    "brown",    1,  "url('textures/sandy_wall.jpg')"],
+    
+    
+    // Wall 2
     [0,     100,    1000,   0,      0,      0,          2000,   400,    "brown",    1,  "url('textures/sandy_wall.jpg')"],
-    // [-10,   100,    1000,  90,   0,      0,          2000,   400,    "brown",    1,  "url('textures/sandy_wall.jpg')"],
+    
+    // Wall 3 = rechts
+    [1000,  100,      0,      0,      90,     0,          2000,   400,    "brown",    1,  "url('textures/sandy_wall.jpg')"],
+    
+    // Wall 4 = Links
+    [-1000, 100,     0,      0,       90,      0,         2000,   400,    "brown",    1,  "url('textures/sandy_wall.jpg')"],
+
 ];
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 // 
@@ -73,18 +87,17 @@ function drawMyWorld(squares, name) {
         mySquare1.style.transform = `translate3d(${600 + squares[i][0] - squares[i][6] / 2}px, ${400 + squares[i][1] - squares[i][7] / 2}px, ${squares[i][2]}px) rotateX(${squares[i][3]}deg) rotateY(${squares[i][4]}deg) rotateZ(${squares[i][5]}deg)`;
         mySquare1.style.opacity = squares[i][9];
         world.appendChild(mySquare1);
-        console.log(squares.length)
     }
 }
 
-drawMyWorld(myRoom, "wall")
+
 // drawMyWorld(squares, "MMM");
 // drawWorld()
 
 
+drawMyWorld(myRoom, "wall")
 
 // function update(){
-
 // }
 
 // let game = setInterval(update, 10);
@@ -94,6 +107,7 @@ drawMyWorld(myRoom, "wall")
 // Functions logical
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 document.addEventListener("keydown", (event) =>{
+    // console.log("Key: " + event.key)
     if(
         event.key == "ArrowUp"
         || 
@@ -133,15 +147,24 @@ document.addEventListener("keydown", (event) =>{
         console.log("up")
     }
 
-    if(event.key == "Space"){
+    if(event.key == "c"){
         // world.style.transform = `rotateY(${dry}deg)`
-        drz++
+        move++
+    }
+    if(event.key == "v"){
+        // world.style.transform = `rotateY(${dry}deg)`
+        move--
     }
     // world.style.transform = `rotateX(${drx}deg) rotateY(${dry}deg)`;
     world.style.transform = `
         rotateX(${drx}deg) 
         rotateY(${dry}deg) 
         rotateZ(${drz}deg)
+    
+        translateX(${move}px)
+        translateZ(${move}px)
     `;
+        // translateY(${move}px)
+
 })
 
