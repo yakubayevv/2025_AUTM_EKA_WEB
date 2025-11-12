@@ -155,12 +155,13 @@ document.addEventListener("keydown", (event) =>{
         // world.style.transform = `rotateY(${dry}deg)`
         move--
     }
-    // world.style.transform = `rotateX(${drx}deg) rotateY(${dry}deg)`;
+    
+    // Question_ Axis-Anordnung ist mega komisch?
     world.style.transform = `
         rotateX(${drx}deg) 
         rotateY(${dry}deg) 
         rotateZ(${drz}deg)
-    
+
         translateX(${move}px)
         translateZ(${move}px)
     `;
