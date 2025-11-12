@@ -10,7 +10,7 @@ let squares = [
 ];
 
 let myRoom = [
-    [0, 100, 0, 90, 0, 0, 2000, 2000, "brown", 1, "url('textures/floor_02.jpg')"],
+    [0, 100, 0, 90, 0, 0, 2000, 2000, "brown", 1, "url('textures/floor_01.jpg')"],
     [0, 100, -1000, 0, 0, 0, 2000, 400, "brown", 1, "url('textures/broken_brick_wall_diff_1k.jpg')"],
 ];
 
