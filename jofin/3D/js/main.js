@@ -11,6 +11,14 @@ document.addEventListener("keydown", (event) =>{
         drx--;
         world.style.transform = `rotateX(${drx}deg)`
     }
+    if(event.key == "ArrowLeft"){
+        drx--;
+        world.style.transform = `rotateY(${drx}deg)`
+    }
+    if(event.key == "ArrowRight"){
+        drx++;
+        world.style.transform = `rotateY(${drx}deg)`
+    }   
 })
 
 // function update(){
