@@ -25,24 +25,27 @@ let squares = [
 ];
 
 let myRoom = [
-    // ,    ,       Length, Winkelx,Winkely,Winkelz,    X,      Y,      color,      ,        
+    // x,    y,     Z, Winkelx,Winkely,Winkelz,    X,      Y,      color,      ,        
     
     // Floor
     [0,     100,    0,      90,     0,      0,          2000,   2000,   "brown",    1,  "url('textures/floor_01.jpg')"],
     
-    // Wall 1
+    // Wall 1 - vorne
     [0,     100,    -1000,  0,      0,      0,          2000,   400,    "brown",    1,  "url('textures/sandy_wall.jpg')"],
     
     
-    // Wall 2
+    // Wall 2 - hinten
     [0,     100,    1000,   0,      0,      0,          2000,   400,    "brown",    1,  "url('textures/sandy_wall.jpg')"],
     
     // Wall 3 = rechts
-    [1000,  100,      0,      0,      90,     0,          2000,   400,    "brown",    1,  "url('textures/sandy_wall.jpg')"],
+    [1000,  100,    0,      0,      90,     0,          2000,   400,    "brown",    1,  "url('textures/sandy_wall.jpg')"],
     
     // Wall 4 = Links
-    [-1000, 100,     0,      0,       90,      0,         2000,   400,    "brown",    1,  "url('textures/sandy_wall.jpg')"],
+    [-1000, 100,    0,      0,       90,      0,         2000,   400,    "brown",    1,  "url('textures/sandy_wall.jpg')"],
 
+
+
+    [0, -100, 0, 90, 0, 0, 2000, 2000, "brown", 1, "url('textures/wood_ceiling.jpg')"],
 ];
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 // 
@@ -167,5 +170,6 @@ document.addEventListener("keydown", (event) =>{
     `;
         // translateY(${move}px)
     // IF-Abfrage inwieweit
+
 })
 
