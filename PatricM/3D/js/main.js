@@ -2,8 +2,12 @@ var world = document.getElementById("world");
 var container = document.getElementById("container");
 
 //
+var lock = false;
+document.addEventListener("pointerlockchange", (event) => {
+    lock = !lock;
+})
 container.onclick = function () {
-    container.requestPointerLock();
+    if (!lock) container.requestPointerLock();
 }
 //
 
@@ -75,10 +79,10 @@ function update() {
     pawn.z += dz;
     pawn.x += dx;
 
-    world.style.transform = `translate3d(${-pawn.x}px, ${pawn.y}px, ${pawn.z}px)`;
-
-    pawn.rx += drx;
-    pawn.ry += dry;
+    if (lock) {
+        pawn.rx += drx;
+        pawn.ry += dry;
+    }
 
     world.style.transform = `translateZ(600px) rotateX(${-pawn.rx}deg) rotateY(${pawn.ry}deg) translate3d(${-pawn.x}px, ${pawn.y}px, ${pawn.z}px)`;
 }

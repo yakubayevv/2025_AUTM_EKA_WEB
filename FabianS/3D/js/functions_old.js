@@ -20,3 +20,68 @@ function drawWorld(){
     }
 
 }
+
+
+document.addEventListener("keydown", (event) =>{
+    // console.log("Key: " + event.key)
+    if(
+        event.key == "ArrowUp"
+        || 
+        event.key == "w"
+    ){
+        drx++;
+        // world.style.transform = `rotateX(${drx}deg)`
+        console.log("up")
+    }
+    
+    if(
+        event.key == "ArrowDown"
+        || 
+        event.key == "s"
+    ){
+        drx--;
+        // world.style.transform = `rotateX(${drx}deg)`
+        console.log("up")
+    }
+
+    if(
+        event.key == "ArrowLeft"
+        || 
+        event.key == "a"
+    ){
+        dry--;
+        // world.style.transform = `rotateY(${dry}deg)`
+    }
+
+    if(
+        event.key == "ArrowRight"
+        || 
+        event.key == "d"
+    ){
+        dry++;
+        // world.style.transform = `rotateY(${dry}deg)`
+        console.log("up")
+    }
+
+    if(event.key == "c"){
+        // world.style.transform = `rotateY(${dry}deg)`
+        move++
+    }
+    if(event.key == "v"){
+        // world.style.transform = `rotateY(${dry}deg)`
+        move--
+    }
+    
+    // Question_ Axis-Anordnung ist mega komisch?
+    world.style.transform = `
+        rotateX(${drx}deg) 
+        rotateY(${dry}deg) 
+        rotateZ(${drz}deg)
+
+        translateX(${move}px)
+        translateZ(${move}px)
+    `;
+        // translateY(${move}px)
+    // IF-Abfrage inwieweit
+
+})

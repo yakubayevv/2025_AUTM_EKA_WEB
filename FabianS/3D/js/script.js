@@ -9,27 +9,64 @@ let dry = 0
 let drz = 0;
 let move = 0;
 let mySquares = []
+var pressForward = 0
+let pressBack = 0
+let pressRight = 0
+let pressLeft = 0;
+var mouseX = 0
+let mouseY = 0;
+let mouse_sensitivity = 2
+var lock = false 
+
 var world = document.getElementById("world");
+let container = document.getElementById("container")
 
 
 // Konstruktor
-function player(x = 0, y = 0, z = 0, vx = 0, vy = 0, vz = 0){
-    this.x = x 
-    this.y = y 
-    this.z = z
-    this.vx = x
-    this.vy = y
-    this.vz = z
-    console.log(x, y, z)
+function player(x, y, z, rx, ry, vx, vy, vz){
+    this.x = x;
+    this.y = y;
+    this.z = z;
+    this.rx = rx;
+    this.ry = ry;
+    this.vx = vx;
+    this.vy = vy;
+    this.vz = vz;
 }
+
 function update(){
-    world.style.transform = `translate3d(${pawn.x}px, ${pawn.y}px, ${pawn.z}px)`
+    let dz = pressForward - pressBack;
+    let dx = pressRight - pressLeft;
+    let drx = mouseY / mouse_sensitivity;
+    let dry = mouseX / mouse_sensitivity;
+
+    mouseX = mouseY = 0;
+
+    pawn.z += dz;
+    pawn.x += dx;
+
+    world.style.transform = `translate3d(${-pawn.x}px, ${pawn.y}px, ${pawn.z}px)`;
+
+    pawn.rx += drx;
+    pawn.ry += dry;
+
+    world.style.transform = `translateZ(600px) rotateX(${-pawn.rx}deg) rotateY(${pawn.ry}deg) translate3d(${-pawn.x}px, ${pawn.y}px, ${pawn.z}px)`;
 }
+
 
 
 let game = setInterval(update, 10);
 console.log("new player")
-var pawn = new player(0, 0, 0, 0, 0, 0)
+var pawn = new player(0, 0, 0, 0, 0, 5, 5, 5);
+
+document.addEventListener("pointerlockchange", (event) => {
+    lock = !lock;
+})
+container.onclick = function () {
+    if(!lock){
+        container.requestPointerLock();
+    }
+}
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 // 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -104,67 +141,39 @@ drawMyWorld(myRoom, "wall")
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 // Functions logical
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-document.addEventListener("keydown", (event) =>{
-    // console.log("Key: " + event.key)
-    if(
-        event.key == "ArrowUp"
-        || 
-        event.key == "w"
-    ){
-        drx++;
-        // world.style.transform = `rotateX(${drx}deg)`
-        console.log("up")
-    }
-    
-    if(
-        event.key == "ArrowDown"
-        || 
-        event.key == "s"
-    ){
-        drx--;
-        // world.style.transform = `rotateX(${drx}deg)`
-        console.log("up")
-    }
 
-    if(
-        event.key == "ArrowLeft"
-        || 
-        event.key == "a"
-    ){
-        dry--;
-        // world.style.transform = `rotateY(${dry}deg)`
-    }
 
-    if(
-        event.key == "ArrowRight"
-        || 
-        event.key == "d"
-    ){
-        dry++;
-        // world.style.transform = `rotateY(${dry}deg)`
-        console.log("up")
-    }
+//  
 
-    if(event.key == "c"){
-        // world.style.transform = `rotateY(${dry}deg)`
-        move++
+document.addEventListener("keydown", (event) => {
+    if(event.key == "w"){
+        pressForward = pawn.vz;
     }
-    if(event.key == "v"){
-        // world.style.transform = `rotateY(${dry}deg)`
-        move--
+    if(event.key == "s"){
+        pressBack = pawn.vz;
     }
-    
-    // Question_ Axis-Anordnung ist mega komisch?
-    world.style.transform = `
-        rotateX(${drx}deg) 
-        rotateY(${dry}deg) 
-        rotateZ(${drz}deg)
-
-        translateX(${move}px)
-        translateZ(${move}px)
-    `;
-        // translateY(${move}px)
-    // IF-Abfrage inwieweit
-
+    if(event.key == "d"){
+        pressRight = pawn.vx;
+    }
+    if(event.key == "a"){
+        pressLeft = pawn.vx;
+    }
 })
-
+document.addEventListener("keyup", (event) => {
+if(event.key == "w"){
+        pressForward = 0;
+    }
+    if(event.key == "s"){
+        pressBack = 0;
+    }
+    if(event.key == "d"){
+        pressRight = 0;
+    }
+    if(event.key == "a"){
+        pressLeft = 0;
+    }
+})
+document.addEventListener("mousemove", (event) => {
+    mouseX = event.movementX;
+    mouseY = event.movementY;
+})
