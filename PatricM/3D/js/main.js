@@ -18,9 +18,7 @@ let myRoom = [
 
 drawMyWorld(myRoom, "wall")
 
-// let drx = 0;
-
-var pressForward = pressBack = 0;
+var pressForward = pressBack = pressRight = pressLeft = 0;
 
 document.addEventListener("keydown", (event) => {
     if(event.key == "w"){
@@ -29,14 +27,12 @@ document.addEventListener("keydown", (event) => {
     if(event.key == "s"){
         pressBack = pawn.vz;
     }
-    // if (event.key == "ArrowUp") {
-    //     drx++;
-    //     world.style.transform = `rotateX(${drx}deg)`
-    // }
-    // if (event.key == "ArrowDown") {
-    //     drx--;
-    //     world.style.transform = `rotateX(${drx}deg)`
-    // }
+    if(event.key == "d"){
+        pressRight = pawn.vx;
+    }
+    if(event.key == "a"){
+        pressLeft = pawn.vx;
+    }
 })
 document.addEventListener("keyup", (event) => {
 if(event.key == "w"){
@@ -45,14 +41,22 @@ if(event.key == "w"){
     if(event.key == "s"){
         pressBack = 0;
     }
+    if(event.key == "d"){
+        pressRight = 0;
+    }
+    if(event.key == "a"){
+        pressLeft = 0;
+    }
 })
 
 function update(){
     let dz = pressForward - pressBack;
+    let dx = pressRight - pressLeft;
 
     pawn.z += dz;
+    pawn.x += dx;
 
-    world.style.transform = `translate3d(${pawn.x}px, ${pawn.y}px, ${pawn.z}px)`;
+    world.style.transform = `translate3d(${-pawn.x}px, ${pawn.y}px, ${pawn.z}px)`;
 }
 
 let game = setInterval(update, 10);
