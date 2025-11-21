@@ -4,20 +4,23 @@
 // https://polyhaven.com/
 // https://www.fr.de/panorama/geschichte-vom-louvre-passwort-bis-zu-den-atom-codes-die-schlimmsten-security-fails-der-94028611.html
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+const DEG = Math.PI/180;
+
 let drx = 0;
 let dry = 0
 let drz = 0;
 let move = 0;
 let mySquares = []
-var pressForward = 0
+
+let pressForward = 0
 let pressBack = 0
 let pressRight = 0
 let pressLeft = 0;
-var mouseX = 0
+let mouseX = 0
 let mouseY = 0;
-let mouse_sensitivity = 2
-var lock = false 
-
+let mouseSensitivity = 0.5
+let lock = false 
+// 3x3 2d Rotation
 var world = document.getElementById("world");
 let container = document.getElementById("container")
 
@@ -35,28 +38,30 @@ function player(x, y, z, rx, ry, vx, vy, vz){
 }
 
 function update(){
-    let dz = pressForward - pressBack;
-    let dx = pressRight - pressLeft;
-    let drx = mouseY / mouse_sensitivity;
-    let dry = mouseX / mouse_sensitivity;
+    // original
+    let dz = +(pressRight - pressLeft) * Math.sin(pawn.ry * DEG) - (pressForward - pressBack) * Math.cos(pawn.ry * DEG)
+    let dx = +(pressRight - pressLeft) * Math.cos(pawn.ry * DEG) + (pressForward - pressBack) * Math.sin(pawn.ry * DEG)
 
-    mouseX = mouseY = 0;
+    let drx = mouseY * mouseSensitivity;
+    let dry = mouseX * mouseSensitivity;
+
+    mouseX = 0
+    mouseY = 0;
 
     pawn.z += dz;
     pawn.x += dx;
 
-    world.style.transform = `translate3d(${-pawn.x}px, ${pawn.y}px, ${pawn.z}px)`;
-
-    pawn.rx += drx;
-    pawn.ry += dry;
-
-    world.style.transform = `translateZ(600px) rotateX(${-pawn.rx}deg) rotateY(${pawn.ry}deg) translate3d(${-pawn.x}px, ${pawn.y}px, ${pawn.z}px)`;
+    if (lock) {
+        pawn.rx += drx;
+        pawn.ry += dry;
+    }
+    world.style.transform = `translateZ(600px) rotateX(${-pawn.rx}deg) rotateY(${pawn.ry}deg) translate3d(${-pawn.x}px, ${pawn.y}px, ${-pawn.z}px)`;
+    // world.style.transform = `translateZ(600px) rotateX(${-pawn.rx}deg) rotateY(${pawn.ry}deg) translate3d(${-pawn.x}px, ${pawn.y}px, ${pawn.z}px)`;
 }
 
 
 
 let game = setInterval(update, 10);
-console.log("new player")
 var pawn = new player(0, 0, 0, 0, 0, 5, 5, 5);
 
 document.addEventListener("pointerlockchange", (event) => {
