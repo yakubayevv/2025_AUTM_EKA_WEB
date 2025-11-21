@@ -1,12 +1,15 @@
 var world = document.getElementById("world");
 
-function player(x, y, z){
+function player(x, y, z, vx, vy, vz){
     this.x = x;
     this.y = y;
     this.z = z;
+    this.vx = vx;
+    this.vy = vy;
+    this.vz = vz;
 }
 
-var pawn = new player(0, 0, 0);
+var pawn = new player(0, 0, 0, 5, 5, 5);
 
 let myRoom = [
     [0, 100, 0, 90, 0, 0, 2000, 2000, "brown", 1, "url('textures/floor_01.jpg')"],
@@ -17,7 +20,15 @@ drawMyWorld(myRoom, "wall")
 
 // let drx = 0;
 
+var pressForward = pressBack = 0;
+
 document.addEventListener("keydown", (event) => {
+    if(event.key == "w"){
+        pressForward = pawn.vz;
+    }
+    if(event.key == "s"){
+        pressBack = pawn.vz;
+    }
     // if (event.key == "ArrowUp") {
     //     drx++;
     //     world.style.transform = `rotateX(${drx}deg)`
@@ -27,10 +38,20 @@ document.addEventListener("keydown", (event) => {
     //     world.style.transform = `rotateX(${drx}deg)`
     // }
 })
-
-
+document.addEventListener("keyup", (event) => {
+if(event.key == "w"){
+        pressForward = 0;
+    }
+    if(event.key == "s"){
+        pressBack = 0;
+    }
+})
 
 function update(){
+    let dz = pressForward - pressBack;
+
+    pawn.z += dz;
+
     world.style.transform = `translate3d(${pawn.x}px, ${pawn.y}px, ${pawn.z}px)`;
 }
 
