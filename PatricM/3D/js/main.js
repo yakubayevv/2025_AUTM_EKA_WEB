@@ -52,7 +52,7 @@ function update(){
 
     pawn.z += dz;
 
-    world.style.transform = `translate3d(${pawn.x}px, ${pawn.y}px, ${pawn.z}px)`;
+    world.style.transform = `translate3d(${-pawn.x}px, ${pawn.y}px, ${pawn.z}px)`;
 }
 
 let game = setInterval(update, 10);

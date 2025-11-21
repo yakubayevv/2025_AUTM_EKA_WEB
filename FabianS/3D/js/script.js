@@ -9,8 +9,27 @@ let dry = 0
 let drz = 0;
 let move = 0;
 let mySquares = []
-
 var world = document.getElementById("world");
+
+
+// Konstruktor
+function player(x = 0, y = 0, z = 0, vx = 0, vy = 0, vz = 0){
+    this.x = x 
+    this.y = y 
+    this.z = z
+    this.vx = x
+    this.vy = y
+    this.vz = z
+    console.log(x, y, z)
+}
+function update(){
+    world.style.transform = `translate3d(${pawn.x}px, ${pawn.y}px, ${pawn.z}px)`
+}
+
+
+let game = setInterval(update, 10);
+console.log("new player")
+var pawn = new player(0, 0, 0, 0, 0, 0)
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 // 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -25,54 +44,34 @@ let squares = [
 ];
 
 let myRoom = [
-    // x,    y,     Z, Winkelx,Winkely,Winkelz,    X,      Y,      color,      ,        
+    // x,    y,     Z, Winkelx,Winkely,Winkelz,         X,      Y,      color,      ,        
     
     // Floor
     [0,     100,    0,      90,     0,      0,          2000,   2000,   "brown",    1,  "url('textures/floor_01.jpg')"],
     
     // Wall 1 - vorne
-    [0,     100,    -1000,  0,      0,      0,          2000,   400,    "brown",    1,  "url('textures/sandy_wall.jpg')"],
+    [0,     0,    -1000,  0,      0,      0,            2000,   200,    "brown",    1,  "url('textures/sandy_wall.jpg')"],
     
     
     // Wall 2 - hinten
-    [0,     100,    1000,   0,      0,      0,          2000,   400,    "brown",    1,  "url('textures/sandy_wall.jpg')"],
+    [0,     0,    1000,   0,      0,      0,          2000,   200,    "brown",    1,  "url('textures/sandy_wall.jpg')"],
     
     // Wall 3 = rechts
-    [1000,  100,    0,      0,      90,     0,          2000,   400,    "brown",    1,  "url('textures/sandy_wall.jpg')"],
+    [1000,  0,    0,      0,      90,     0,          2000,   200,    "brown",    1,  "url('textures/sandy_wall.jpg')"],
     
     // Wall 4 = Links
-    [-1000, 100,    0,      0,       90,      0,         2000,   400,    "brown",    1,  "url('textures/sandy_wall.jpg')"],
+    [-1000, 0,    0,      0,       90,      0,         2000,  200,    "brown",    1,  "url('textures/sandy_wall.jpg')"],
 
-
-
+    // Decke
     [0, -100, 0, 90, 0, 0, 2000, 2000, "brown", 1, "url('textures/wood_ceiling.jpg')"],
 ];
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 // 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function drawWorld(){
 
-    let mySquare
-    for(let counter = 0; counter < squares.length; counter++){
-        mySquare = document.createElement("div")
-        mySquare.id = `square${counter}`
-        mySquare.style.position = "absolute"
-        mySquare.style.width = `${squares[counter][6]} px`
-        mySquare.style.height = `${squares[counter][7]} px`
-        mySquare.style.background = `${squares[counter][8]} px`
-        mySquare.style.opacity = `${squares[counter][9]} px`
-        mySquare.style.transform = `
-            translate3d(${squares[counter][0]} px, ${squares[counter][1]} px, ${squares[counter][2]} px) 
-            rotateX(${squares[counter][3]} deg)
-            rotateY(${squares[counter][4]} deg)
-            rotateZ(${squares[counter][5]} deg)
-        `
-        world.appendChild(mySquare)
-        mySquares.push(mySquare)
-    }
 
-}
+
 
 function drawMyWorld(squares, name) {
     for (let i = 0; i < squares.length; i++) {
@@ -93,17 +92,13 @@ function drawMyWorld(squares, name) {
     }
 }
 
-
-// drawMyWorld(squares, "MMM");
-// drawWorld()
-
-
+// Mauern und Wände 
 drawMyWorld(myRoom, "wall")
+// Würfel 
+// drawMyWorld(squares, "MMM");
 
-// function update(){
-// }
 
-// let game = setInterval(update, 10);
+
 
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
