@@ -24,7 +24,9 @@ let lock = false
 var world = document.getElementById("world");
 let container = document.getElementById("container")
 
-
+let dx = 0
+let dy = 0
+let dz = 0
 // Konstruktor
 function player(x, y, z, rx, ry, vx, vy, vz){
     this.x = x;
@@ -39,8 +41,8 @@ function player(x, y, z, rx, ry, vx, vy, vz){
 
 function update(){
     // original
-    let dz = +(pressRight - pressLeft) * Math.sin(pawn.ry * DEG) - (pressForward - pressBack) * Math.cos(pawn.ry * DEG)
-    let dx = +(pressRight - pressLeft) * Math.cos(pawn.ry * DEG) + (pressForward - pressBack) * Math.sin(pawn.ry * DEG)
+    dz = +(pressRight - pressLeft) * Math.sin(pawn.ry * DEG) - (pressForward - pressBack) * Math.cos(pawn.ry * DEG)
+    dx = +(pressRight - pressLeft) * Math.cos(pawn.ry * DEG) + (pressForward - pressBack) * Math.sin(pawn.ry * DEG)
 
     let drx = mouseY * mouseSensitivity;
     let dry = mouseX * mouseSensitivity;
