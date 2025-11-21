@@ -1,40 +1,93 @@
 var world = document.getElementById("world");
+var container = document.getElementById("container");
 
-let squares = [
-    [500, 300, 100, 0, 0, 0, 200, 200, "blueviolet", 0.5],
-    [500, 300, -100, 0, 0, 0, 200, 200, "yellowgreen", 0.5],
-    [500, 400, 0, 90, 0, 0, 200, 200, "black", 0.5],
-    [500, 200, 0, 90, 0, 0, 200, 200, "red", 0.5],
-    [600, 300, 0, 0, 90, 0, 200, 200, "blue", 0.5],
-    [400, 300, 0, 0, 90, 0, 200, 200, "green", 0.5]
-];
+//
+var lock = false;
+document.addEventListener("pointerlockchange", (event) => {
+    lock = !lock;
+})
+container.onclick = function () {
+    if (!lock) container.requestPointerLock();
+}
+//
+
+function player(x, y, z, rx, ry, vx, vy, vz) {
+    this.x = x;
+    this.y = y;
+    this.z = z;
+    this.rx = rx;
+    this.ry = ry;
+    this.vx = vx;
+    this.vy = vy;
+    this.vz = vz;
+}
+
+var pawn = new player(0, 0, 0, 0, 0, 5, 5, 5);
 
 let myRoom = [
     [0, 100, 0, 90, 0, 0, 2000, 2000, "brown", 1, "url('textures/floor_01.jpg')"],
-    [0, 100, -1000, 0, 0, 0, 2000, 400, "brown", 1, "url('textures/sandy_wall.jpg')"],
+    [0, -100, -1000, 0, 0, 0, 2000, 400, "brown", 1, "url('textures/sandy_wall.jpg')"],
 ];
 
 drawMyWorld(myRoom, "wall")
-// drawMyWorld(squares, "MMM");
 
-let drx = 0;
+var pressForward = pressBack = pressRight = pressLeft = 0;
+var mouseX = mouseY = 0;
+var mouseSensitivity = 0.5;
 
 document.addEventListener("keydown", (event) => {
-    if (event.key == "ArrowUp") {
-        drx++;
-        world.style.transform = `rotateX(${drx}deg)`
+    if (event.key == "w") {
+        pressForward = pawn.vz;
     }
-    if (event.key == "ArrowDown") {
-        drx--;
-        world.style.transform = `rotateX(${drx}deg)`
+    if (event.key == "s") {
+        pressBack = pawn.vz;
+    }
+    if (event.key == "d") {
+        pressRight = pawn.vx;
+    }
+    if (event.key == "a") {
+        pressLeft = pawn.vx;
     }
 })
+document.addEventListener("keyup", (event) => {
+    if (event.key == "w") {
+        pressForward = 0;
+    }
+    if (event.key == "s") {
+        pressBack = 0;
+    }
+    if (event.key == "d") {
+        pressRight = 0;
+    }
+    if (event.key == "a") {
+        pressLeft = 0;
+    }
+})
+document.addEventListener("mousemove", (event) => {
+    mouseX = event.movementX;
+    mouseY = event.movementY;
+})
 
-// function update(){
+function update() {
+    let dz = pressForward - pressBack;
+    let dx = pressRight - pressLeft;
+    let drx = mouseY * mouseSensitivity;
+    let dry = mouseX * mouseSensitivity;
 
-// }
+    mouseX = mouseY = 0;
 
-// let game = setInterval(update, 10);
+    pawn.z += dz;
+    pawn.x += dx;
+
+    if (lock) {
+        pawn.rx += drx;
+        pawn.ry += dry;
+    }
+
+    world.style.transform = `translateZ(600px) rotateX(${-pawn.rx}deg) rotateY(${pawn.ry}deg) translate3d(${-pawn.x}px, ${pawn.y}px, ${pawn.z}px)`;
+}
+
+let game = setInterval(update, 10);
 
 function drawMyWorld(squares, name) {
     for (let i = 0; i < squares.length; i++) {
