@@ -1,40 +1,40 @@
 var world = document.getElementById("world");
 
-let squares = [
-    [500, 300, 100, 0, 0, 0, 200, 200, "blueviolet", 0.5],
-    [500, 300, -100, 0, 0, 0, 200, 200, "yellowgreen", 0.5],
-    [500, 400, 0, 90, 0, 0, 200, 200, "black", 0.5],
-    [500, 200, 0, 90, 0, 0, 200, 200, "red", 0.5],
-    [600, 300, 0, 0, 90, 0, 200, 200, "blue", 0.5],
-    [400, 300, 0, 0, 90, 0, 200, 200, "green", 0.5]
-];
+function player(x, y, z){
+    this.x = x;
+    this.y = y;
+    this.z = z;
+}
+
+var pawn = new player(0, 0, 0);
 
 let myRoom = [
     [0, 100, 0, 90, 0, 0, 2000, 2000, "brown", 1, "url('textures/floor_01.jpg')"],
-    [0, 100, -1000, 0, 0, 0, 2000, 400, "brown", 1, "url('textures/sandy_wall.jpg')"],
+    [0, -100, -1000, 0, 0, 0, 2000, 400, "brown", 1, "url('textures/sandy_wall.jpg')"],
 ];
 
 drawMyWorld(myRoom, "wall")
-// drawMyWorld(squares, "MMM");
 
-let drx = 0;
+// let drx = 0;
 
 document.addEventListener("keydown", (event) => {
-    if (event.key == "ArrowUp") {
-        drx++;
-        world.style.transform = `rotateX(${drx}deg)`
-    }
-    if (event.key == "ArrowDown") {
-        drx--;
-        world.style.transform = `rotateX(${drx}deg)`
-    }
+    // if (event.key == "ArrowUp") {
+    //     drx++;
+    //     world.style.transform = `rotateX(${drx}deg)`
+    // }
+    // if (event.key == "ArrowDown") {
+    //     drx--;
+    //     world.style.transform = `rotateX(${drx}deg)`
+    // }
 })
 
-// function update(){
 
-// }
 
-// let game = setInterval(update, 10);
+function update(){
+    world.style.transform = `translate3d(${pawn.x}px, ${pawn.y}px, ${pawn.z}px)`;
+}
+
+let game = setInterval(update, 10);
 
 function drawMyWorld(squares, name) {
     for (let i = 0; i < squares.length; i++) {
