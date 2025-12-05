@@ -21,6 +21,7 @@ function player(x, y, z, rx, ry, vx, vy, vz) {
     this.vx = vx;
     this.vy = vy;
     this.vz = vz;
+    this.onGround = false;
 }
 
 var pawn = new player(0, 0, 0, 0, 0, 7, 7, 7);
@@ -32,10 +33,12 @@ let myRoom = [
 
 drawMyWorld(myRoom, "wall")
 
-var pressForward = pressBack = pressRight = pressLeft = 0;
+var pressForward = pressBack = pressRight = pressLeft = pressUp = 0;
 var mouseX = mouseY = 0;
 var mouseSensitivity = 1;
 var dx = dy = dz = 0;
+var gravity = 0.2;
+var onGround = false;
 
 document.addEventListener("keydown", (event) => {
     if (event.key == "w") {
@@ -49,6 +52,9 @@ document.addEventListener("keydown", (event) => {
     }
     if (event.key == "a") {
         pressLeft = pawn.vx;
+    }
+    if (event.key == " ") {
+        pressUp = pawn.vy;
     }
 })
 document.addEventListener("keyup", (event) => {
@@ -64,6 +70,9 @@ document.addEventListener("keyup", (event) => {
     if (event.key == "a") {
         pressLeft = 0;
     }
+    if (event.key == " ") {
+        pressUp = 0;
+    }
 })
 document.addEventListener("mousemove", (event) => {
     mouseX = event.movementX;
@@ -73,6 +82,16 @@ document.addEventListener("mousemove", (event) => {
 function update() {
     dz = +(pressRight - pressLeft) * Math.sin(pawn.ry * DEG) - (pressForward - pressBack) * Math.cos(pawn.ry * DEG);
     dx = +(pressRight - pressLeft) * Math.cos(pawn.ry * DEG) + (pressForward - pressBack) * Math.sin(pawn.ry * DEG);
+    dy += gravity;
+
+    if (onGround) {
+        dy = 0;
+        if (pressUp) {
+            // console.log("jump");
+            dy = -pressUp;
+            onGround = false;
+        }
+    }
 
     //   dx = -(pressLeft - pressRight) * Math.cos(pawn.ry * deg) + (pressForward - pressBack) * Math.sin(pawn.ry * deg);
     //let dz = pressForward - pressBack;
@@ -87,6 +106,7 @@ function update() {
 
     pawn.z += dz;
     pawn.x += dx;
+    pawn.y += dy;
 
     if (lock) {
         pawn.rx += drx;
@@ -98,7 +118,7 @@ function update() {
         pawn.ry += dry;
     }
 
-    world.style.transform = `translateZ(600px) rotateX(${-pawn.rx}deg) rotateY(${pawn.ry}deg) translate3d(${-pawn.x}px, ${pawn.y}px, ${-pawn.z}px)`;
+    world.style.transform = `translateZ(600px) rotateX(${-pawn.rx}deg) rotateY(${pawn.ry}deg) translate3d(${-pawn.x}px, ${-pawn.y}px, ${-pawn.z}px)`;
 }
 
 let game = setInterval(update, 10);
@@ -141,7 +161,7 @@ function collision(mapObj, leadObj) {
             // let point2 = new Array();
 
             if (Math.abs(point1[0]) < (mapObj[i][6] + 70) / 2 && Math.abs(point1[1]) < (mapObj[i][7] + 70) / 2 && Math.abs(point1[2]) < 50) {
-                console.log("collision!");
+                // console.log("collision!");
                 point1[2] = Math.sign(point0[2]) * 50;
                 let point2 = coorReTransform(point1[0], point1[1], point1[2], mapObj[i][3], mapObj[i][4], mapObj[i][5]);
                 let point3 = coorReTransform(point1[0], point1[1], 0, mapObj[i][3], mapObj[i][4], mapObj[i][5]);
@@ -152,6 +172,7 @@ function collision(mapObj, leadObj) {
                 if (Math.abs(normal[1]) > 0.8) {
                     if (point3[1] > point2[1]) {
                         onGround = true;
+                        // console.log("OnGround!");
                     }
                 } else {
                     dy = y1 - y0;
