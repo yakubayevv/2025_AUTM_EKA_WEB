@@ -1,4 +1,4 @@
-const DEG = Math.PI/180;
+const DEG = Math.PI / 180;
 var world = document.getElementById("world");
 var container = document.getElementById("container");
 
@@ -70,8 +70,8 @@ document.addEventListener("mousemove", (event) => {
 })
 
 function update() {
-    let dz = +(pressRight - pressLeft) * Math.sin(pawn.ry * DEG) - (pressForward - pressBack) * Math.cos(pawn.ry * DEG) ;
-    let dx = +(pressRight - pressLeft) * Math.cos(pawn.ry * DEG) + (pressForward - pressBack) * Math.sin(pawn.ry * DEG)  ;
+    let dz = +(pressRight - pressLeft) * Math.sin(pawn.ry * DEG) - (pressForward - pressBack) * Math.cos(pawn.ry * DEG);
+    let dx = +(pressRight - pressLeft) * Math.cos(pawn.ry * DEG) + (pressForward - pressBack) * Math.sin(pawn.ry * DEG);
 
     //   dx = -(pressLeft - pressRight) * Math.cos(pawn.ry * deg) + (pressForward - pressBack) * Math.sin(pawn.ry * deg);
     //let dz = pressForward - pressBack;
@@ -87,6 +87,11 @@ function update() {
 
     if (lock) {
         pawn.rx += drx;
+        if (pawn.rx > 57) {
+            pawn.rx = 57;
+        } else if (pawn.rx < -57) {
+            pawn.rx = -57;
+        }
         pawn.ry += dry;
     }
 
