@@ -14,7 +14,7 @@ let dx = 0;
 let dy = 0;
 let dz = 0
 let mySquares = []
-
+let gravity = 10
 let pressForward = 0
 let pressBack = 0
 let pressRight = 0
@@ -24,6 +24,7 @@ let mouseY = 0;
 let mouseSensitivity = 0.5
 let lock = false 
 
+let onGround = false 
 // 3x3 2d Rotation
 var world = document.getElementById("world");
 let container = document.getElementById("container")
@@ -48,6 +49,7 @@ function player(x,
     this.vx = vx;
     this.vy = vy;
     this.vz = vz;
+    this.onGround = false 
 }
 
 function update(){
@@ -58,15 +60,21 @@ function update(){
     let drx = mouseY * mouseSensitivity;
     let dry = mouseX * mouseSensitivity;
 
+    
+    
     collision(
         myRoom, 
         pawn
     )
+
     mouseX = 0
     mouseY = 0;
 
     pawn.z += dz;
     pawn.x += dx;
+    // if(!onGround){
+        // pawn.y -= gravity;
+    // }
 
     if (lock) {
         pawn.rx += drx;
@@ -90,16 +98,20 @@ function update(){
 
 
 
-let game = setInterval(update,
-     10);
-var pawn = new player(0,
-     0,
-     0,
-     0,
-     0,
-     5,
-     5,
-     5);
+let game = setInterval(
+    update,
+     10
+);
+var pawn = new player(
+    0,
+    0,
+    0,
+    0,
+    0,
+    7,
+    7,
+    7
+);
 
 document.addEventListener("pointerlockchange",
      (event) => {
@@ -193,18 +205,18 @@ let squares = [
         0.5
     ],
     
-    [
-        400,
-        300,
-        0,
-        0,
-        90,
-        0,
-        200,
-        200,
-        "green",
-        0.5
-    ]
+    // [
+    //     400,
+    //     300,
+    //     0,
+    //     0,
+    //     90,
+    //     0,
+    //     200,
+    //     200,
+    //     "green",
+    //     0.5
+    // ]
 ];
 
 let myRoom = [
@@ -316,7 +328,25 @@ let myRoom = [
         "brown",
         1,
         "url('textures/wood_ceiling.jpg')"
-    ],    
+    ],   
+    
+    
+
+    // Decke
+    [
+        0,
+        0,
+        0,
+        90,
+        0,
+        0,
+        2000,
+        2000,
+        "brown",
+        1,
+        "url('textures/wood_ceiling.jpg')"
+    ],  
+
 ];
 
 
@@ -365,6 +395,9 @@ document.addEventListener("keydown", (event) => {
     }
     if(event.key == "a"){
         pressLeft = pawn.vx;
+    }
+    if(event.key == " "){
+        console.log(" cdfsa")
     }
 })
 
