@@ -1,4 +1,4 @@
-const DEG = Math.PI/180;
+const DEG = Math.PI / 180;
 var world = document.getElementById("world");
 var container = document.getElementById("container");
 
@@ -35,6 +35,7 @@ drawMyWorld(myRoom, "wall")
 var pressForward = pressBack = pressRight = pressLeft = 0;
 var mouseX = mouseY = 0;
 var mouseSensitivity = 1;
+var dx = dy = dz = 0;
 
 document.addEventListener("keydown", (event) => {
     if (event.key == "w") {
@@ -70,8 +71,8 @@ document.addEventListener("mousemove", (event) => {
 })
 
 function update() {
-    let dz = +(pressRight - pressLeft) * Math.sin(pawn.ry * DEG) - (pressForward - pressBack) * Math.cos(pawn.ry * DEG) ;
-    let dx = +(pressRight - pressLeft) * Math.cos(pawn.ry * DEG) + (pressForward - pressBack) * Math.sin(pawn.ry * DEG)  ;
+    dz = +(pressRight - pressLeft) * Math.sin(pawn.ry * DEG) - (pressForward - pressBack) * Math.cos(pawn.ry * DEG);
+    dx = +(pressRight - pressLeft) * Math.cos(pawn.ry * DEG) + (pressForward - pressBack) * Math.sin(pawn.ry * DEG);
 
     //   dx = -(pressLeft - pressRight) * Math.cos(pawn.ry * deg) + (pressForward - pressBack) * Math.sin(pawn.ry * deg);
     //let dz = pressForward - pressBack;
@@ -80,6 +81,8 @@ function update() {
     let drx = mouseY * mouseSensitivity;
     let dry = mouseX * mouseSensitivity;
 
+    collision(myRoom, pawn);
+
     mouseX = mouseY = 0;
 
     pawn.z += dz;
@@ -87,6 +90,11 @@ function update() {
 
     if (lock) {
         pawn.rx += drx;
+        if (pawn.rx > 57) {
+            pawn.rx = 57;
+        } else if (pawn.rx < -57) {
+            pawn.rx = -57;
+        }
         pawn.ry += dry;
     }
 
@@ -111,4 +119,75 @@ function drawMyWorld(squares, name) {
         mySquare1.style.opacity = squares[i][9];
         world.appendChild(mySquare1);
     }
+}
+
+function collision(mapObj, leadObj) {
+    for (let i = 0; i < mapObj.length; i++) {
+        //spēlētāja koordinātes katra taiststūra koordināšu sistēmā
+        let x0 = (leadObj.x - mapObj[i][0]);
+        let y0 = (leadObj.y - mapObj[i][1]);
+        let z0 = (leadObj.z - mapObj[i][2]);
+
+        if ((x0 ** 2 + y0 ** 2 + z0 ** 2 + dx ** 2 + dy ** 2 + dz ** 2) < (mapObj[i][6] ** 2 + mapObj[i][7] ** 2)) {
+            //Pārvietošanās
+            let x1 = x0 + dx;
+            let y1 = y0 + dy;
+            let z1 = z0 + dz;
+
+            //Jaunā punkta koodrinātes
+            let point0 = coorTransform(x0, y0, z0, mapObj[i][3], mapObj[i][4], mapObj[i][5]);
+            let point1 = coorTransform(x1, y1, z1, mapObj[i][3], mapObj[i][4], mapObj[i][5]);
+            let normal = coorReTransform(0, 0, 1, mapObj[i][3], mapObj[i][4], mapObj[i][5]);
+            // let point2 = new Array();
+
+            if (Math.abs(point1[0]) < (mapObj[i][6] + 70) / 2 && Math.abs(point1[1]) < (mapObj[i][7] + 70) / 2 && Math.abs(point1[2]) < 50) {
+                console.log("collision!");
+                point1[2] = Math.sign(point0[2]) * 50;
+                let point2 = coorReTransform(point1[0], point1[1], point1[2], mapObj[i][3], mapObj[i][4], mapObj[i][5]);
+                let point3 = coorReTransform(point1[0], point1[1], 0, mapObj[i][3], mapObj[i][4], mapObj[i][5]);
+                dx = point2[0] - x0;
+                dy = point2[1] - y0;
+                dz = point2[2] - z0;
+
+                if (Math.abs(normal[1]) > 0.8) {
+                    if (point3[1] > point2[1]) {
+                        onGround = true;
+                    }
+                } else {
+                    dy = y1 - y0;
+                }
+            }
+        }
+    };
+}
+
+function coorTransform(x0, y0, z0, rxc, ryc, rzc) {
+    let x1 = x0;
+    let y1 = y0 * Math.cos(rxc * DEG) + z0 * Math.sin(rxc * DEG);
+    let z1 = -y0 * Math.sin(rxc * DEG) + z0 * Math.cos(rxc * DEG);
+
+    let x2 = x1 * Math.cos(ryc * DEG) - z1 * Math.sin(ryc * DEG);
+    let y2 = y1;
+    let z2 = x1 * Math.sin(ryc * DEG) + z1 * Math.cos(ryc * DEG);
+
+    let x3 = x2 * Math.cos(rzc * DEG) + y2 * Math.sin(rzc * DEG);
+    let y3 = -x2 * Math.sin(rzc * DEG) + y2 * Math.cos(rzc * DEG);
+    let z3 = z2;
+    return [x3, y3, z3];
+}
+
+function coorReTransform(x3, y3, z3, rxc, ryc, rzc) {
+    let x2 = x3 * Math.cos(rzc * DEG) - y3 * Math.sin(rzc * DEG);
+    let y2 = x3 * Math.sin(rzc * DEG) + y3 * Math.cos(rzc * DEG);
+    let z2 = z3;
+
+    let x1 = x2 * Math.cos(ryc * DEG) + z2 * Math.sin(ryc * DEG);
+    let y1 = y2;
+    let z1 = -x2 * Math.sin(ryc * DEG) + z2 * Math.cos(ryc * DEG);
+
+    let x0 = x1;
+    let y0 = y1 * Math.cos(rxc * DEG) - z1 * Math.sin(rxc * DEG);
+    let z0 = y1 * Math.sin(rxc * DEG) + z1 * Math.cos(rxc * DEG);
+
+    return [x0, y0, z0];
 }
