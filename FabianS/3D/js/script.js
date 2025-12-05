@@ -10,6 +10,9 @@ let drx = 0;
 let dry = 0
 let drz = 0;
 let move = 0;
+let dx = 0;
+let dy = 0;
+let dz = 0
 let mySquares = []
 
 let pressForward = 0
@@ -20,15 +23,23 @@ let mouseX = 0
 let mouseY = 0;
 let mouseSensitivity = 0.5
 let lock = false 
+
 // 3x3 2d Rotation
 var world = document.getElementById("world");
 let container = document.getElementById("container")
 
-let dx = 0
-let dy = 0
-let dz = 0
+
+
 // Konstruktor
-function player(x, y, z, rx, ry, vx, vy, vz){
+function player(x,
+     y,
+     z,
+     rx,
+     ry,
+     vx,
+     vy,
+     vz
+){
     this.x = x;
     this.y = y;
     this.z = z;
@@ -47,6 +58,10 @@ function update(){
     let drx = mouseY * mouseSensitivity;
     let dry = mouseX * mouseSensitivity;
 
+    collision(
+        myRoom, 
+        pawn
+    )
     mouseX = 0
     mouseY = 0;
 
@@ -55,18 +70,39 @@ function update(){
 
     if (lock) {
         pawn.rx += drx;
+        if ((pawn.rx) > 57){
+            pawn.rx = 57
+        }  
+        if ((pawn.rx) < -37){
+            pawn.rx = -37
+        }  
         pawn.ry += dry;
     }
-    world.style.transform = `translateZ(600px) rotateX(${-pawn.rx}deg) rotateY(${pawn.ry}deg) translate3d(${-pawn.x}px, ${pawn.y}px, ${-pawn.z}px)`;
-    // world.style.transform = `translateZ(600px) rotateX(${-pawn.rx}deg) rotateY(${pawn.ry}deg) translate3d(${-pawn.x}px, ${pawn.y}px, ${pawn.z}px)`;
+    world.style.transform = 
+        `translateZ(600px) 
+        rotateX(${-pawn.rx}deg) 
+        rotateY(${pawn.ry}deg) 
+        translate3d(${-pawn.x}px,
+     ${pawn.y}px,
+     ${-pawn.z}px)
+    `;
 }
 
 
 
-let game = setInterval(update, 10);
-var pawn = new player(0, 0, 0, 0, 0, 5, 5, 5);
+let game = setInterval(update,
+     10);
+var pawn = new player(0,
+     0,
+     0,
+     0,
+     0,
+     5,
+     5,
+     5);
 
-document.addEventListener("pointerlockchange", (event) => {
+document.addEventListener("pointerlockchange",
+     (event) => {
     lock = !lock;
 })
 container.onclick = function () {
@@ -74,50 +110,218 @@ container.onclick = function () {
         container.requestPointerLock();
     }
 }
+
+
+
+
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-// 
+// draw My World
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 let squares = [
-    // TranslateVal1, TranslateVal2, TranslateVal3, , , , width, height, color, opacity
-    [500, 300, 100, 0, 0, 0, 200, 200, "blueviolet", 0.5],
-    [500, 300, -100, 0, 0, 0, 200, 200, "yellowgreen", 0.5],
-    [500, 400, 0, 90, 0, 0, 200, 200, "black", 0.5],
-    [500, 200, 0, 90, 0, 0, 200, 200, "red", 0.5],
-    [600, 300, 0, 0, 90, 0, 200, 200, "blue", 0.5],
-    [400, 300, 0, 0, 90, 0, 200, 200, "green", 0.5]
+    // TranslateVal1,
+    //  TranslateVal2,
+    //  TranslateVal3,
+    //  ,
+    //  ,
+    //  ,
+    //  width,
+    //  height,
+    //  color,
+    //  opacity
+    [
+        500,
+        300,
+        100,
+        0,
+        0,
+        0,
+        200,
+        200,
+        "blueviolet",
+        0.5
+    ],
+    
+    [
+        500,
+        300,
+        -100,
+        0,
+        0,
+        0,
+        200,
+        200,
+        "yellowgreen",
+        0.5
+    ],
+    
+    [
+        500,
+        400,
+        0,
+        90,
+        0,
+        0,
+        200,
+        200,
+        "black",
+        0.5
+    ],
+    
+    [
+        500,
+        200,
+        0,
+        90,
+        0,
+        0,
+        200,
+        200,
+        "red",
+        0.5
+    ],
+    
+    [
+        600,
+        300,
+        0,
+        0,
+        90,
+        0,
+        200,
+        200,
+        "blue",
+        0.5
+    ],
+    
+    [
+        400,
+        300,
+        0,
+        0,
+        90,
+        0,
+        200,
+        200,
+        "green",
+        0.5
+    ]
 ];
 
 let myRoom = [
-    // x,    y,     Z, Winkelx,Winkely,Winkelz,         X,      Y,      color,      ,        
-    
+    // [
+    //     x,
+    //     y,
+    //     Z,
+    //     Winkelx,
+    //     Winkely,
+    //     Winkelz,
+    //     X,
+    //     Y,
+    //     color,
+    //     ,
+    //     Image
+    // ]
+
     // Floor
-    [0,     100,    0,      90,     0,      0,          2000,   2000,   "brown",    1,  "url('textures/floor_01.jpg')"],
+    [
+        0,
+        100,
+        0,
+        90,
+        0,
+        0,
+        2000,
+        2000,
+        "brown",
+        1,
+        "url('textures/floor_01.jpg')"
+    ],
+    
     
     // Wall 1 - vorne
-    [0,     0,    -1000,  0,      0,      0,            2000,   200,    "brown",    1,  "url('textures/sandy_wall.jpg')"],
+    [
+        0,
+        0,
+        -1000,
+        0,
+        0,
+        0,
+        2000,
+        200,
+        "brown",
+        1,
+        "url('textures/sandy_wall.jpg')"
+    ],
+    
     
     
     // Wall 2 - hinten
-    [0,     0,    1000,   0,      0,      0,          2000,   200,    "brown",    1,  "url('textures/sandy_wall.jpg')"],
+    [
+        0,
+        0,
+        1000,
+        0,
+        0,
+        0,
+        2000,
+        200,
+        "brown",
+        1,
+        "url('textures/sandy_wall.jpg')"
+    ],
+    
     
     // Wall 3 = rechts
-    [1000,  0,    0,      0,      90,     0,          2000,   200,    "brown",    1,  "url('textures/sandy_wall.jpg')"],
+    [
+        1000,
+        0,
+        0,
+        0,
+        90,
+        0,
+        2000,
+        200,
+        "brown",
+        1,
+        "url('textures/sandy_wall.jpg')"
+    ],
+    
     
     // Wall 4 = Links
-    [-1000, 0,    0,      0,       90,      0,         2000,  200,    "brown",    1,  "url('textures/sandy_wall.jpg')"],
-
+    [
+        -1000,
+        0,
+        0,
+        0,
+        90,
+        0,
+        2000,
+        200,
+        "brown",
+        1,
+        "url('textures/sandy_wall.jpg')"
+    ],
+    
+    
     // Decke
-    [0, -100, 0, 90, 0, 0, 2000, 2000, "brown", 1, "url('textures/wood_ceiling.jpg')"],
+    [
+        0,
+        -100,
+        0,
+        90,
+        0,
+        0,
+        2000,
+        2000,
+        "brown",
+        1,
+        "url('textures/wood_ceiling.jpg')"
+    ],    
 ];
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-// 
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
-
-
-function drawMyWorld(squares, name) {
+function drawMyWorld(squares,name) {
     for (let i = 0; i < squares.length; i++) {
         let mySquare1 = document.createElement("div");
         mySquare1.id = `${name}${i}`;
@@ -130,13 +334,13 @@ function drawMyWorld(squares, name) {
         else{
             mySquare1.style.backgroundColor = squares[i][8];
         }
-        mySquare1.style.transform = `translate3d(${600 + squares[i][0] - squares[i][6] / 2}px, ${400 + squares[i][1] - squares[i][7] / 2}px, ${squares[i][2]}px) rotateX(${squares[i][3]}deg) rotateY(${squares[i][4]}deg) rotateZ(${squares[i][5]}deg)`;
+        mySquare1.style.transform = `translate3d(${600 + squares[i][0] - squares[i][6] / 2}px,
+     ${400 + squares[i][1] - squares[i][7] / 2}px,
+     ${squares[i][2]}px) rotateX(${squares[i][3]}deg) rotateY(${squares[i][4]}deg) rotateZ(${squares[i][5]}deg)`;
         mySquare1.style.opacity = squares[i][9];
         world.appendChild(mySquare1);
     }
 }
-
-// Mauern und Wände 
 drawMyWorld(myRoom, "wall")
 // Würfel 
 // drawMyWorld(squares, "MMM");
@@ -146,11 +350,8 @@ drawMyWorld(myRoom, "wall")
 
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-// Functions logical
+// movement
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-//  
 
 document.addEventListener("keydown", (event) => {
     if(event.key == "w"){
@@ -166,6 +367,7 @@ document.addEventListener("keydown", (event) => {
         pressLeft = pawn.vx;
     }
 })
+
 document.addEventListener("keyup", (event) => {
 if(event.key == "w"){
         pressForward = 0;
@@ -180,7 +382,8 @@ if(event.key == "w"){
         pressLeft = 0;
     }
 })
-document.addEventListener("mousemove", (event) => {
+
+document.addEventListener("mousemove",(event) => {
     mouseX = event.movementX;
     mouseY = event.movementY;
 })
