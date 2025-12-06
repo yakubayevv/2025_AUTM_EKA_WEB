@@ -2,11 +2,12 @@
 
 function collision(
   mapObj, 
-  leadObj, 
+  leadObj
   // type
 ) {
   // if (type !== "lode") {
-  //   onGround = false;
+    // Muss auskommentiert werden das ich gleich falle 
+    onGround = false;
   // }
 
   for (let i = 0; i < mapObj.length; i++) {
@@ -43,9 +44,11 @@ function collision(
 
           if (Math.abs(normal[1]) > 0.8) {
             if (point3[1] > point2[1]) {
+              // console.log("OnGround!")
               onGround = true;
             }
-          } else {
+          } 
+          else {
             dy = y1 - y0;
           }
         // }
