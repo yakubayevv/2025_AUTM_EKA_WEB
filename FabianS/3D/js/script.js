@@ -7,6 +7,8 @@
 const DEG = Math.PI / 180;
 
 let container = document.getElementById("container")
+var world = document.getElementById("world");
+
 
 let drx = 0;
 let dry = 0
@@ -66,7 +68,6 @@ function player(
     this.onGround = false 
 }
 
-var world = document.getElementById("world");
 
 function update(){
     // original

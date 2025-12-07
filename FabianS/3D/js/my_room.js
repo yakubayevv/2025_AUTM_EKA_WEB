@@ -3,6 +3,18 @@
 // import { interior_design } from "./interior_design/stair_one.js";
 
 // let world = document.getElementById("world");
+let floor_width = 2000
+let step_temp
+
+let faktor_y = 100
+let faktor_x = 400
+let faktor_z = 400
+
+let height = 200 
+let width = 200
+let start_pisition_floor = 35
+
+
 
 function drawMyWorld(squares, name) {
     for (let i = 0; i < squares.length; i++) {
@@ -122,85 +134,139 @@ myRoom = [
         "url('textures/wood_ceiling.jpg')"
     ],
 ];
+let steps = buildSteps(3);
+myRoom = [...myRoom, ...steps];
 
-let step_one = [
-    [
-        0,
-        77.5,
-        100,
-        0,
-        0,
-        0,
-        200,
-        35,
-        "#4169E1",
-        1,
-    ],
-    [
-        100,
-        77.5,
-        0,
-        0,
-        90,
-        0,
-        200,
-        35,
-        "brown",
-        1,
-    ],
-    [
-        -100,
-        77.5,
-        0,
-        0,
-        90,
-        0,
-        200,
-        35,
-        "#ff0378",
-        1,
-    ],
-    [
-        0,
-        77.5,
-        -100,
-        0,
-        0,
-        0,
-        200,
-        35,
-        "#0FFF50",
-        1,
-    ],
-    [
-        0,
-        60,
-        0,
-        90,
-        0,
-        0,
-        200,
-        200,
-        "yellow",
-        1,
-    ],
-];
-
-let step_two = [
-    [
-        0,
-        60,
-        0,
-        90,
-        0,
-        0,
-        200,
-        200,
-        "yellow",
-        1,
-    ],
-]
-// hier Innenausstattung anhängen
-myRoom = [...myRoom, ...step_one];
-
+function getRandomInt(min, max) {
+    return Math.round(Math.random() * (max - min)) + min;
+//   return Math.floor(Math.random() * max);
+}
 drawMyWorld(myRoom, "wall");
+
+function buildSteps(count) {
+    
+    let allSteps = [];
+    let structure = "url('textures/wood_ceiling.jpg')"
+    let x_abstand = 0
+    let y_abstand = 0
+    let z_abstand = 0
+    let z
+    let c 
+    for (let i = 0; i < count; i++) {
+        c = getRandomInt(-3, 2)
+        console.log(c)
+        z_abstand = i;
+
+        if(i == (0)){
+            x_abstand = 0
+            z_abstand = 0
+            y_abstand = 0
+        }
+        if(i == (1)){
+            x_abstand = 1
+            z_abstand = 1
+            y_abstand = 1
+        }
+        if(i == 2){
+            x_abstand = 1
+            z_abstand = 2
+            y_abstand = 2
+        }
+        let step = [
+            // floor 
+            [
+                300 + faktor_x * x_abstand,
+                95.25 - faktor_y * y_abstand,
+                0 + faktor_z * z_abstand,
+                90,
+                0,
+                0,
+                width,
+                height,
+                "yellow",
+                1,
+                // "url('textures/wood_ceiling.jpg')"
+            ],    
+            // vordere Platte
+            [
+                300 + faktor_x * x_abstand,
+                77.5 - faktor_y * y_abstand,
+                100 + faktor_z * z_abstand,
+                0,
+                0,
+                0,
+                width,
+                start_pisition_floor,
+                "#4169E1",
+                1,
+                // "url('textures/wood_ceiling.jpg')"
+            ],
+
+            // rechte Platte
+            [
+                400 + faktor_x * x_abstand,
+                77.5 - faktor_y * y_abstand,
+                0 + faktor_z * z_abstand,
+                0,
+                90,
+                0,
+                width,
+                start_pisition_floor,
+                "brown",
+                1,
+                // "url('textures/wood_ceiling.jpg')"
+            ],
+
+            // linke Platte 
+            [
+                (200) + faktor_x * x_abstand,
+                77.5 - faktor_y * y_abstand,
+                0 + faktor_z * z_abstand,
+                0,
+                90,
+                0,
+                width,
+                start_pisition_floor,
+                "#ff0378",
+                1,
+                // "url('textures/wood_ceiling.jpg')"
+            ],
+               
+
+            // hintere Platte
+            [
+                300 + faktor_x * x_abstand,
+                77.5 - faktor_y * y_abstand,
+                -100 + faktor_z * z_abstand,
+                0,
+                0,
+                0,
+                width,
+                start_pisition_floor,
+                "#0FFF50",
+                1,
+                // "url('textures/wood_ceiling.jpg')"
+            ],
+               
+
+            // obere Platte
+            [
+                300 + faktor_x * x_abstand,
+                60 - faktor_y * y_abstand,
+                0 + faktor_z * z_abstand,
+                90,
+                0,
+                0,
+                width,
+                height,
+                "yellow",
+                1,
+                "url('textures/wood_ceiling.jpg')"
+            ],
+        ];
+
+        allSteps.push(...step);
+    }
+
+    return allSteps;
+}
