@@ -31,12 +31,14 @@ function drawMyWorld(squares, name) {
         }
 
         mySquare1.style.transform =
-            `translate3d(${600 + squares[i][0] - squares[i][6] / 2}px,
-                         ${400 + squares[i][1] - squares[i][7] / 2}px,
-                         ${squares[i][2]}px)
-             rotateX(${squares[i][3]}deg)
-             rotateY(${squares[i][4]}deg)
-             rotateZ(${squares[i][5]}deg)`;
+            `translate3d(
+                ${600 + squares[i][0] - squares[i][6] / 2}px,
+                ${400 + squares[i][1] - squares[i][7] / 2}px,
+                ${squares[i][2]}px
+            )
+            rotateX(${squares[i][3]}deg)
+            rotateY(${squares[i][4]}deg)
+            rotateZ(${squares[i][5]}deg)`;
 
         mySquare1.style.opacity = squares[i][9];
         world.appendChild(mySquare1);
