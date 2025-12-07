@@ -16,6 +16,16 @@
 /* 
     
 */
+#pawn {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: blueviolet;
+    top: 390px;
+    left: 590px;
+}
+
 #container{
     position: absolute;
     width: 1200px;

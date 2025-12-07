@@ -9,7 +9,19 @@ let step_temp
 let faktor_y = 100
 let faktor_x = 400
 let faktor_z = 400
-
+let structures = [
+        "",
+        "url('textures/floor_01.jpg')",
+        "url('textures/sandy_wall.jpg')",
+        "url('textures/stone_wall.jpg')",
+        "url('textures/wood_ceiling.jpg')"
+    ]
+let x_abstand = 0
+let y_abstand = 0
+let z_abstand = 0
+let z
+let c 
+let structure
 let height = 200 
 let width = 200
 let start_pisition_floor = 35
@@ -58,7 +70,7 @@ myRoom = [
         2000,
         "brown",
         1,
-        "url('textures/floor_01.jpg')"
+        structures[1]
     ],
 
     // Wall 1 - vorne
@@ -73,7 +85,7 @@ myRoom = [
         400,
         "brown",
         1,
-        "url('textures/sandy_wall.jpg')"
+        structures[2]
     ],
 
     // Wall 2 - hinten
@@ -88,7 +100,7 @@ myRoom = [
         400,
         "brown",
         1,
-        "url('textures/sandy_wall.jpg')"
+        structures[2]
     ],
 
     // Wall 3 - rechts
@@ -103,7 +115,7 @@ myRoom = [
         400,
         "brown",
         1,
-        "url('textures/sandy_wall.jpg')"
+        structures[2]
     ],
 
     // Wall 4 - links
@@ -118,7 +130,7 @@ myRoom = [
         400,
         "brown",
         1,
-        "url('textures/sandy_wall.jpg')"
+        structures[2]
     ],
 
     // Decke
@@ -133,10 +145,10 @@ myRoom = [
         2000,
         "brown",
         1,
-        "url('textures/wood_ceiling.jpg')"
+        structures[4]
     ],
 ];
-let steps = buildSteps(3);
+let steps = buildSteps(10);
 myRoom = [...myRoom, ...steps];
 
 function getRandomInt(min, max) {
@@ -148,19 +160,14 @@ drawMyWorld(myRoom, "wall");
 function buildSteps(count) {
     
     let allSteps = [];
-    let structure = "url('textures/wood_ceiling.jpg')"
-    let x_abstand = 0
-    let y_abstand = 0
-    let z_abstand = 0
-    let z
-    let c 
+
     for (let i = 0; i < count; i++) {
         c = getRandomInt(-3, 2)
         console.log(c)
         z_abstand = i;
 
         if(i == (0)){
-            x_abstand = 0
+            x_abstand = 1
             z_abstand = 0
             y_abstand = 0
         }
@@ -174,6 +181,33 @@ function buildSteps(count) {
             z_abstand = 2
             y_abstand = 2
         }
+
+        // 
+        if(i == 3){
+            x_abstand = 1
+            z_abstand = -0.65
+            y_abstand = 0.5
+        }
+        if(i == 4){
+            x_abstand = 1
+            z_abstand = -1.15
+            y_abstand = 1.0
+        }
+        if(i == 5){
+            x_abstand = 1
+            z_abstand = -1.65
+            y_abstand = 1.5
+        }
+        if(i == 6){
+            x_abstand = 1
+            z_abstand = -2.2
+            y_abstand = 2.0
+        }
+        // if(i == 7){
+        //     x_abstand = 1
+        //     z_abstand = -2.5
+        //     y_abstand = 2.5
+        // }
         let step = [
             // floor 
             [
@@ -187,7 +221,7 @@ function buildSteps(count) {
                 height,
                 "yellow",
                 1,
-                // "url('textures/wood_ceiling.jpg')"
+                structures[0]
             ],    
             // vordere Platte
             [
@@ -201,7 +235,7 @@ function buildSteps(count) {
                 start_pisition_floor,
                 "#4169E1",
                 1,
-                // "url('textures/wood_ceiling.jpg')"
+                structures[0]
             ],
 
             // rechte Platte
@@ -216,7 +250,7 @@ function buildSteps(count) {
                 start_pisition_floor,
                 "brown",
                 1,
-                // "url('textures/wood_ceiling.jpg')"
+                structures[0]
             ],
 
             // linke Platte 
@@ -231,7 +265,7 @@ function buildSteps(count) {
                 start_pisition_floor,
                 "#ff0378",
                 1,
-                // "url('textures/wood_ceiling.jpg')"
+                structures[0]
             ],
                
 
@@ -247,7 +281,7 @@ function buildSteps(count) {
                 start_pisition_floor,
                 "#0FFF50",
                 1,
-                // "url('textures/wood_ceiling.jpg')"
+                structures[0]
             ],
                
 
@@ -263,7 +297,7 @@ function buildSteps(count) {
                 height,
                 "yellow",
                 1,
-                "url('textures/wood_ceiling.jpg')"
+                structures[0]
             ],
         ];
 
