@@ -3,9 +3,10 @@
 // import { interior_design } from "./interior_design/stair_one.js";
 
 // let world = document.getElementById("world");
-let floor_width = 2000
-let step_temp
 
+let step_temp
+let allSteps = [];
+let addition_walls = []
 let faktor_y = 100
 let faktor_x = 400
 let faktor_z = 400
@@ -19,12 +20,17 @@ let structures = [
 let x_abstand = 0
 let y_abstand = 0
 let z_abstand = 0
-let z
-let c 
 let structure
-let height = 200 
-let width = 200
+
+let height_room = 2000
+let width_room = 2000
+let height_wall_floor = 400
+
+let height_stair = 200 
+let width_stair = 200
+
 let start_pisition_floor = 35
+
 
 
 
@@ -66,8 +72,8 @@ myRoom = [
         90,
         0,
         0,
-        2000,
-        2000,
+        width_room,
+        width_room,
         "brown",
         1,
         structures[1]
@@ -81,8 +87,8 @@ myRoom = [
         0,
         0,
         0,
-        2000,
-        400,
+        width_room,
+        height_wall_floor,
         "brown",
         1,
         structures[2]
@@ -96,8 +102,8 @@ myRoom = [
         0,
         0,
         0,
-        2000,
-        400,
+        width_room,
+        height_wall_floor,
         "brown",
         1,
         structures[2]
@@ -111,8 +117,8 @@ myRoom = [
         0,
         90,
         0,
-        2000,
-        400,
+        width_room,
+        height_wall_floor,
         "brown",
         1,
         structures[2]
@@ -126,8 +132,8 @@ myRoom = [
         0,
         90,
         0,
-        2000,
-        400,
+        width_room,
+        height_wall_floor,
         "brown",
         1,
         structures[2]
@@ -141,73 +147,94 @@ myRoom = [
         90,
         0,
         0,
-        2000,
-        2000,
+        width_room,
+        width_room,
         "brown",
         1,
         structures[4]
     ],
 ];
-let steps = buildSteps(10);
+let steps = buildSteps();
 myRoom = [...myRoom, ...steps];
 
-function getRandomInt(min, max) {
-    return Math.round(Math.random() * (max - min)) + min;
-//   return Math.floor(Math.random() * max);
-}
+let add_walls = second_floor_front_and_behind()
+myRoom = [...myRoom, ...add_walls];
+
+add_walls = interrior_walls()
+myRoom = [...myRoom, ...add_walls];
+
+
+add_walls = second_floor_left_and_right()
+myRoom = [...myRoom, ...add_walls];
+
+
+
 drawMyWorld(myRoom, "wall");
 
-function buildSteps(count) {
-    
-    let allSteps = [];
 
-    for (let i = 0; i < count; i++) {
-        c = getRandomInt(-3, 2)
-        console.log(c)
-        z_abstand = i;
 
-        if(i == (0)){
-            x_abstand = 1
-            z_abstand = 0
-            y_abstand = 0
-        }
-        if(i == (1)){
-            x_abstand = 1
-            z_abstand = 1
-            y_abstand = 1
-        }
-        if(i == 2){
-            x_abstand = 1
-            z_abstand = 2
-            y_abstand = 2
-        }
 
-        // 
-        if(i == 3){
-            x_abstand = 1
-            z_abstand = -0.65
-            y_abstand = 0.5
+function buildSteps() { 
+    allSteps = [];
+    let abstaende =  [
+        { 
+            x: 1, 
+            z: 0, 
+            y: 0 
+        },
+        { 
+            x: 1, 
+            z: -0.65, 
+            y: 0.5 
+        },
+        { 
+            x: 1, 
+            z: 0.65, 
+            y: 0.5 
+        },
+        { 
+            x: 1, 
+            z: -1.15, 
+            y: 1.0 
+        },
+        { 
+            x: 1, 
+            z: -1.65,
+             y: 1.5 
+        },
+        { 
+            x: 1, 
+            z: -2.2,  
+            y: 2.0 
+        },
+        { 
+            x: 1, 
+            z:  1.15, 
+            y: 1.0 
+        },
+        { 
+            x: 1, 
+            z:  1.15, 
+            y: 1.0 
+        }, // identisch zu 5 – bewusst übernommen
+        { 
+            x: 1, 
+            z:  1.65, 
+            y: 1.5 
+        },
+        { 
+            x: 1, 
+            z:  2.2,  
+            y: 2.0 
         }
-        if(i == 4){
-            x_abstand = 1
-            z_abstand = -1.15
-            y_abstand = 1.0
-        }
-        if(i == 5){
-            x_abstand = 1
-            z_abstand = -1.65
-            y_abstand = 1.5
-        }
-        if(i == 6){
-            x_abstand = 1
-            z_abstand = -2.2
-            y_abstand = 2.0
-        }
-        // if(i == 7){
-        //     x_abstand = 1
-        //     z_abstand = -2.5
-        //     y_abstand = 2.5
-        // }
+    ];
+    for (let i = 0; i < abstaende.length; i++) {
+        let { x, y, z } = abstaende[i];
+
+        let x_abstand = x;
+        let y_abstand = y;
+        let z_abstand = z;
+
         let step = [
             // floor 
             [
@@ -217,8 +244,8 @@ function buildSteps(count) {
                 90,
                 0,
                 0,
-                width,
-                height,
+                width_stair,
+                height_stair,
                 "yellow",
                 1,
                 structures[0]
@@ -231,7 +258,7 @@ function buildSteps(count) {
                 0,
                 0,
                 0,
-                width,
+                width_stair,
                 start_pisition_floor,
                 "#4169E1",
                 1,
@@ -246,7 +273,7 @@ function buildSteps(count) {
                 0,
                 90,
                 0,
-                width,
+                width_stair,
                 start_pisition_floor,
                 "brown",
                 1,
@@ -261,7 +288,7 @@ function buildSteps(count) {
                 0,
                 90,
                 0,
-                width,
+                width_stair,
                 start_pisition_floor,
                 "#ff0378",
                 1,
@@ -277,7 +304,7 @@ function buildSteps(count) {
                 0,
                 0,
                 0,
-                width,
+                width_stair,
                 start_pisition_floor,
                 "#0FFF50",
                 1,
@@ -293,8 +320,8 @@ function buildSteps(count) {
                 90,
                 0,
                 0,
-                width,
-                height,
+                width_stair,
+                height_stair,
                 "yellow",
                 1,
                 structures[0]
@@ -303,6 +330,423 @@ function buildSteps(count) {
 
         allSteps.push(...step);
     }
+    let x_abstand = 1;
+    let y_abstand = 0;
+    let z_abstand = 0;
+    step = [
+        [
+            495 + faktor_x * x_abstand,
+            -140 - faktor_y * y_abstand,
+            - width_room / 2 + 120 + faktor_z * z_abstand,
+            90,
+            0,
+            0,
+            200,
+            200,
+            "orange",
+            1,
+            structures[0]
+        ], 
+        [
+            495 + faktor_x * x_abstand,
+            -105 - faktor_y * y_abstand,
+            - width_room / 2 + 120 + faktor_z * z_abstand,
+            90,
+            0,
+            0,
+            200,
+            200,
+            "orange",
+            1,
+            structures[0]
+        ], 
+        [
+            495 + faktor_x * x_abstand,
+            -122.5 - faktor_y * y_abstand,
+            - width_room / 2 + 221 + faktor_z * z_abstand,
+            0,
+            0,
+            0,
+            200,
+            34.5,
+            "green",
+            1,
+            structures[0]
+        ],
+        [
+            495 + faktor_x * x_abstand,
+            -140 - faktor_y * y_abstand,
+            width_room / 2 - 120 + faktor_z * z_abstand,
+            90,
+            0,
+            0,
+            200,
+            200,
+            "orange",
+            1,
+            structures[0]
+        ],
+        [
+            495 + faktor_x * x_abstand,
+            -105 - faktor_y * y_abstand,
+            width_room / 2 - 120 + faktor_z * z_abstand,
+            90,
+            0,
+            0,
+            200,
+            200,
+            "orange",
+            1,
+            structures[0]
+        ], 
+        [
+            495 + faktor_x * x_abstand,
+            -123 - faktor_y * y_abstand,
+            width_room / 2 - 221 + faktor_z * z_abstand,
+            0,
+            0,
+            0,
+            200,
+            34,
+            "green",
+            1,
+            structures[0]
+        ], 
+    ]
+
+    allSteps.push(...step);
+    return allSteps;
+}
+
+function second_floor_front_and_behind(){
+    let height_second_floor_side_one = 200
+    let width_second_floor_side_one = width_room - width_stair - 200
+
+    let height_second_floor_side_two = 200
+    let width_second_floor_side_two = 200
+    let abstaende = [
+        {
+            x : 0,
+            y : 2.0,
+            z : 2.2
+        },
+        {
+            x : 0,
+            y : 2.0,
+            z : -2.2
+        },
+    ]
+    for(let c = 0; c < abstaende.length; c++){
+        let { x, y, z } = abstaende[c];
+
+        let x_abstand = x;
+        let y_abstand = y;
+        let z_abstand = z;
+        console.log(x, y, z, abstaende.length)
+        let add_wall = [
+            // floor 
+            [
+                -198.5 + faktor_x * x_abstand,
+                95.25 - faktor_y * y_abstand,
+                0 + faktor_z * z_abstand,
+                90,
+                0,
+                0,
+                width_second_floor_side_one,
+                height_stair,
+                "brown",
+                1,
+                structures[0]
+            ],    
+            // vordere Platte
+            [
+                -198.5 + faktor_x * x_abstand,
+                77.5 - faktor_y * y_abstand,
+                100 + faktor_z * z_abstand,
+                0,
+                0,
+                0,
+                width_second_floor_side_one,
+                start_pisition_floor,
+                "#666",
+                1,
+                structures[0]
+            ],
+
+            // // rechte Platte
+            [
+                -198.5 + faktor_x * x_abstand,
+                77.5 - faktor_y * y_abstand,
+                0 + faktor_z * z_abstand,
+                0,
+                90,
+                0,
+                width_stair,
+                start_pisition_floor,
+                "brown",
+                1,
+                structures[0]
+            ],
+
+            // // linke Platte 
+            [
+                -198.5 + faktor_x * x_abstand,
+                77.5 - faktor_y * y_abstand,
+                0 + faktor_z * z_abstand,
+                0,
+                90,
+                0,
+                width_stair,
+                start_pisition_floor,
+                "#ff0378",
+                1,
+                structures[0]
+            ],
+               
+
+            // // hintere Platte
+            [
+                -198.5 + faktor_x * x_abstand,
+                77.5 - faktor_y * y_abstand,
+                -100 + faktor_z * z_abstand,
+                0,
+                0,
+                0,
+                width_second_floor_side_one,
+                start_pisition_floor,
+                "#0FFF50",
+                1,
+                structures[0]
+            ],
+               
+
+            // // obere Platte
+            [
+                -198.5 + faktor_x * x_abstand,
+                60 - faktor_y * y_abstand,
+                0 + faktor_z * z_abstand,
+                90,
+                0,
+                0,
+                width_second_floor_side_one,
+                height_stair,
+                "orange",
+                1,
+                structures[0]
+            ],
+        ];
+
+        allSteps.push(...add_wall);
+    }
+    return allSteps;
+}
+function interrior_walls(){
+allSteps = [];
+    let abstaende =  [
+        { 
+            x: 1, 
+            z: 0, 
+            y: 0 
+        },
+    ];
+    for (let i = 0; i < abstaende.length; i++) {
+        let { x, y, z } = abstaende[i];
+
+        let x_abstand = x;
+        let y_abstand = y;
+        let z_abstand = z;
+
+        let step = [
+            // floor 
+            [
+                -500 + faktor_x * x_abstand,
+                -20 - faktor_y * y_abstand,
+                width_room / 2 - 220 + faktor_z * z_abstand,
+                0,
+                0,
+                0,
+                1400,
+                240,
+                "#a0a0a0",
+                1,
+                structures[0]
+            ],    
+            [
+                -500 + faktor_x * x_abstand,
+                -20 - faktor_y * y_abstand,
+                - width_room / 2 + 220 + faktor_z * z_abstand,
+                0,
+                0,
+                0,
+                1400,
+                240,
+                "#a0a0a0",
+                1,
+                structures[0]
+            ],  
+            // 
+            // [
+            //     495 + faktor_x * x_abstand,
+            //     -140 - faktor_y * y_abstand,
+            //     - width_room / 2 + 120 + faktor_z * z_abstand,
+            //     90,
+            //     0,
+            //     0,
+            //     200,
+            //     200,
+            //     "orange",
+            //     1,
+            //     structures[0]
+            // ], 
+            // [
+            //     495 + faktor_x * x_abstand,
+            //     -140 - faktor_y * y_abstand,
+            //     width_room / 2 - 120 + faktor_z * z_abstand,
+            //     90,
+            //     0,
+            //     0,
+            //     200,
+            //     200,
+            //     "orange",
+            //     1,
+            //     structures[0]
+            // ],
+        ];
+
+        allSteps.push(...step);
+    }
+
 
     return allSteps;
+}
+
+function second_floor_left_and_right(){
+
+    let height_second_floor_side_one = 200
+    let width_second_floor_side_one = width_room - width_stair - 200
+
+    let height_second_floor_side_two = height_room - 440
+    let width_second_floor_side_two = 200
+    let abstaende = [
+        {
+            x : 0,
+            y : 2.0,
+            z : 0
+        },
+        // {
+        //     x : 0,
+        //     y : 2.0,
+        //     z : -2.2
+        // },
+    ]
+    for(let c = 0; c < abstaende.length; c++){
+        let { x, y, z } = abstaende[c];
+
+        let x_abstand = x;
+        let y_abstand = y;
+        let z_abstand = z;
+        console.log(x, y, z, abstaende.length)
+        let add_wall = [
+            // floor 
+            [
+                - (width_room / 2) + 100 + faktor_x * x_abstand,
+                95.25 - faktor_y * y_abstand,
+                0 + faktor_z * z_abstand,
+                90,
+                0,
+                0,
+                width_second_floor_side_two,
+                height_second_floor_side_two,
+                "purple",
+                1,
+                structures[0]
+            ],    
+            // Decke
+            [
+                - (width_room / 2) + 100 + faktor_x * x_abstand,
+                60 - faktor_y * y_abstand,
+                0 + faktor_z * z_abstand,
+                90,
+                0,
+                90,
+                height_second_floor_side_two,
+                width_second_floor_side_two,
+                "#666",
+                1,
+                structures[0]
+            ],
+
+            // rechte Platte
+            [
+                - (width_room / 2) + 100 + faktor_x * x_abstand,
+                77.5 - faktor_y * y_abstand,
+                // 0 + faktor_z * z_abstand,
+                height_room / 2 - 220,
+                0,
+                0,
+                0,
+                width_second_floor_side_two,
+                35,
+                "yellow",
+                1,
+                structures[0]
+            ],
+
+            // // // linke Platte 
+            [
+                - (width_room / 2) + 100 + faktor_x * x_abstand,
+                77.5 - faktor_y * y_abstand,
+                // 0 + faktor_z * z_abstand,
+                - height_room / 2 + 220,
+                0,
+                0,
+                0,
+                width_second_floor_side_two,
+                35,
+                "yellow",
+                1,
+                structures[0]
+            ],
+  
+
+            // // // hintere Platte
+            [
+                - (width_room / 2) + 200 + faktor_x * x_abstand,
+                77.5 - faktor_y * y_abstand,
+                0 + faktor_z * z_abstand,
+                90,
+                90,
+                0,
+                35,
+                height_second_floor_side_two,
+                "#0FFF50",
+                1,
+                structures[0]
+            ],
+               
+
+            // // // obere Platte
+            [
+                - (width_room / 2) + 0 + faktor_x * x_abstand,
+                77.5 - faktor_y * y_abstand,
+                0 + faktor_z * z_abstand,
+                90,
+                90,
+                0,
+                35,
+                height_second_floor_side_two,
+                "#0FFF50",
+                1,
+                structures[0]
+            ],
+            
+        ];
+
+        allSteps.push(...add_wall);
+    }
+    return allSteps;
+}
+function getRandomInt(min, max) {
+    return Math.round(Math.random() * (max - min)) + min;
+//   return Math.floor(Math.random() * max);
 }
