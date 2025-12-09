@@ -30,13 +30,14 @@ let mySquares = []
 let mouseX = 0
 let mouseY = 0;
 let mouseSensitivity = 0.5
-let myRoom 
-window.myRoom = myRoom 
+
 
 let onGround = false; 
 
 let pressForward = 0
 let pawn 
+// window.pawn = pawn 
+
 let pressBack = 0
 let pressRight = 0
 let pressLeft = 0;
@@ -88,7 +89,7 @@ function update(){
     let dry = mouseX * mouseSensitivity;
     
     collision(
-        myRoom, 
+        window.myRoom, 
         pawn
     )
 
