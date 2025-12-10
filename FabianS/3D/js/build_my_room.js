@@ -79,7 +79,8 @@ myRoom = [...myRoom, ...add_walls];
 add_walls = second_floor_left_and_right()
 myRoom = [...myRoom, ...add_walls];
 
-
+add_walls = step_handgriff()
+myRoom = [...myRoom, ...add_walls];
 
 drawMyWorld(myRoom, "wall");
 

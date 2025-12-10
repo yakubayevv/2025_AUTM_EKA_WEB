@@ -53,6 +53,7 @@ function buildSteps() {
             y: 2.0 
         }
     ];
+
     for (let i = 0; i < abstaende.length; i++) {
         let { x, y, z } = abstaende[i];
 
@@ -156,6 +157,58 @@ function buildSteps() {
         allSteps.push(...step);
     }
 
+    
 
     return allSteps;
+}
+
+function step_handgriff(){
+    let abstaende =  [
+        { 
+            x: 1, 
+            z: 0, 
+            y: 0 
+        },
+    ];
+    for (let i = 0; i < abstaende.length; i++) {
+        let { x, y, z } = abstaende[i];
+
+        let x_abstand = x;
+        let y_abstand = y;
+        let z_abstand = z;
+
+        step = [
+            // floor 
+  
+            [
+                200 + faktor_x * x_abstand,
+                -97.5 - faktor_y * y_abstand,
+                670 + faktor_z * z_abstand,
+                0,
+                90,
+                0,
+                220,
+                85,
+                "rgba(160,160,160,0.1)",
+                1,
+                structures[0]
+            ],  
+            [
+                200 + faktor_x * x_abstand,
+                -97.5 - faktor_y * y_abstand,
+                -670 + faktor_z * z_abstand,
+                0,
+                90,
+                0,
+                220,
+                85,
+                "rgba(160,160,160,0.1)",
+                1,
+                structures[0]
+            ],  
+            // 
+        ];
+        allSteps.push(...step);
+    }
+    return allSteps
 }
