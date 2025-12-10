@@ -262,7 +262,7 @@ function step_handgriff() {
             // floor 
             [
                 200 + faktor_x * x_abstand,
-                -102 - faktor_y * y_abstand,
+                -102  - faktor_y * y_abstand,
                 660 + faktor_z * z_abstand,
                 0,
                 90,
