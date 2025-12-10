@@ -27,7 +27,7 @@ function interrior_walls(){
             240,
             "#a0a0a0",
             1,
-            structures[0]
+            structures[4]
         ],    
         [
             -500 + faktor_x * x_abstand,
@@ -40,7 +40,7 @@ function interrior_walls(){
             240,
             "#a0a0a0",
             1,
-            structures[0]
+            structures[4]
         ],
     ]
     allSteps.push(...step);

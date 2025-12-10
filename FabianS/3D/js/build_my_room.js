@@ -15,7 +15,8 @@ let structures = [
         "url('textures/floor_01.jpg')",
         "url('textures/sandy_wall.jpg')",
         "url('textures/stone_wall.jpg')",
-        "url('textures/wood_ceiling.jpg')"
+        "url('textures/wood_ceiling.jpg')",
+        "url('textures/TemakiRailing.png')",
     ]
 let x_abstand = 0
 let y_abstand = 0
