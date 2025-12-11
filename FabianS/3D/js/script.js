@@ -152,7 +152,7 @@ if(jump){
         0,
         0,
         0,
-        0,
+        0,// Rotation um y
         7,
         7,
         7

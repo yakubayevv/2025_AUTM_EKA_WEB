@@ -64,34 +64,34 @@ function room_data(){
         ],
 
         // Wall 4 - links
-        [
-            -1000,
-            -100,
-            0,
-            0,
-            90,
-            0,
-            width_room,
-            height_wall_floor,
-            "brown",
-            1,
-            structures[2]
-        ],
+        // [
+        //     -1000,
+        //     -100,
+        //     0,
+        //     0,
+        //     90,
+        //     0,
+        //     width_room,
+        //     height_wall_floor,
+        //     "brown",
+        //     1,
+        //     structures[2]
+        // ],
 
         // Decke
-        [
-            0,
-            -300,
-            0,
-            90,
-            0,
-            0,
-            width_room,
-            width_room,
-            "brown",
-            1,
-            structures[4]
-        ],
+        // [
+        //     0,
+        //     -300,
+        //     0,
+        //     90,
+        //     0,
+        //     0,
+        //     width_room,
+        //     width_room,
+        //     "brown",
+        //     1,
+        //     structures[4]
+        // ],
     ];
     return my_room
 }
