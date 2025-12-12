@@ -21,6 +21,9 @@ let structures = [
         "url('textures/grass.jpg')",
         "url('textures/himmellandschaft.jpg')",
         "url('textures/1_copy.jpg')",
+        "url('textures/oldtown.jpg')",
+        "url('textures/1_copy_2.jpg')",
+        "url('textures/1_gezogen.jpg')",
     ]
 let x_abstand = 0
 let y_abstand = 0
@@ -94,7 +97,19 @@ myRoom = [...myRoom, ...add_walls];
 drawMyWorld(myRoom, "wall");
 
 
+function zahl_87(min, max) {
+    let attr = `
+    Unglückszahl 87 und sind die letzten beiden Ziffern der Zahl von Grahams
+    `
 
+    return Math.round(Math.random() * (max - min)) + min;
+}
+function zahl_269(min, max) {
+    let attr = `
+    Zahl 269 
+    `
+    return Math.round(Math.random() * (max - min)) + min;
+}
 
 
 function getRandomInt(min, max) {

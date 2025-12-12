@@ -30,7 +30,7 @@ function room_data(){
             height_wall_floor + 100,
             "brown",
             1,
-            structures[2]
+            structures[11]
         ],
 
         // Wall 2 - hinten
@@ -45,7 +45,7 @@ function room_data(){
             height_wall_floor + 100,
             "brown",
             1,
-            structures[2]
+            structures[11]
         ],
 
         // Wall 3 - rechts
@@ -60,7 +60,7 @@ function room_data(){
             height_wall_floor + 100,
             "brown",
             1,
-            structures[2]
+            structures[11]
         ],
 
         // Wall 4 - links
@@ -88,7 +88,7 @@ function room_data(){
             height_wall_floor + 100,
             "brown",
             1,
-            structures[9]
+            structures[12]
         ],
 
         // Decke
@@ -103,7 +103,7 @@ function room_data(){
             width_room,
             "#87CEEB",
             1,
-            structures[8]
+            structures[11]
         ],
     ];
     return my_room

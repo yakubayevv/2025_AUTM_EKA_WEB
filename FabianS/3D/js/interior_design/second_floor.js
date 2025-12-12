@@ -50,7 +50,7 @@ function second_floor_front_and_behind() {
                 start_pisition_floor,
                 "#666",
                 1,
-                structures[0]
+                structures[11]
             ],
 
             // rechte Platte
@@ -81,7 +81,7 @@ function second_floor_front_and_behind() {
                 start_pisition_floor,
                 "green",
                 1,
-                structures[0]
+                structures[11]
             ],
 
 
@@ -97,7 +97,7 @@ function second_floor_front_and_behind() {
                 start_pisition_floor,
                 "#0FFF50",
                 1,
-                structures[0]
+                structures[11]
             ],
 
 
@@ -175,7 +175,7 @@ function second_floor_left_and_right() {
             34.5,
             "green",
             1,
-            structures[0]
+            structures[11]
         ],
         [
             500 + faktor_x * x_abstand,
@@ -214,7 +214,7 @@ function second_floor_left_and_right() {
             35,
             "green",
             1,
-            structures[0]
+            structures[11]
         ],
     ]
     allSteps.push(...step);
@@ -276,7 +276,7 @@ function second_floor_left_and_right() {
                 1600,
                 "#4169E1",
                 1,
-                structures[0]
+                structures[11]
             ],
             [
                 1000 + faktor_x * x_abstand,
@@ -289,7 +289,7 @@ function second_floor_left_and_right() {
                 1600,
                 "#4169E1",
                 1,
-                structures[0]
+                structures[11]
             ],
         ]
         allSteps.push(...step);
