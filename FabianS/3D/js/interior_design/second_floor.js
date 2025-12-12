@@ -1,5 +1,6 @@
 
 function second_floor_front_and_behind() {
+    let beleuchtung = structures[11]
     let height_second_floor_side_one = 200
     let width_second_floor_side_one = width_room - width_stair - 198
     let height_second_floor_side_two = 200
@@ -48,9 +49,9 @@ function second_floor_front_and_behind() {
                 0,
                 width_second_floor_side_one,
                 start_pisition_floor,
-                "#666",
+                "#0FFF50",
                 1,
-                structures[11]
+                beleuchtung
             ],
 
             // rechte Platte
@@ -81,7 +82,7 @@ function second_floor_front_and_behind() {
                 start_pisition_floor,
                 "green",
                 1,
-                structures[11]
+                beleuchtung
             ],
 
 
@@ -97,7 +98,8 @@ function second_floor_front_and_behind() {
                 start_pisition_floor,
                 "#0FFF50",
                 1,
-                structures[11]
+                // structures[11]
+                structures[0]
             ],
 
 
@@ -126,7 +128,7 @@ function second_floor_front_and_behind() {
 
 
 function second_floor_left_and_right() {
-
+    let beleuchtung = structures[11]
     let height_second_floor_side_one = 200
     let width_second_floor_side_one = width_room - width_stair - 200
 
