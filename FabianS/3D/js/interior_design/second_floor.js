@@ -36,7 +36,7 @@ function second_floor_front_and_behind() {
                 height_second_floor_side_one,
                 "brown",
                 1,
-                structures[0]
+                structures[4]
             ],
             // vordere Platte
             [
