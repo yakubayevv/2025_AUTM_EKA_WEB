@@ -15,19 +15,19 @@ function room_data(){
             width_room,
             "brown",
             1,
-            structures[1]
+            structures[7]
         ],
 
         // Wall 1 - vorne
         [
             0,
-            -100,
+            -150,
             -1000,
             0,
             0,
             0,
             width_room,
-            height_wall_floor,
+            height_wall_floor + 100,
             "brown",
             1,
             structures[2]
@@ -36,13 +36,13 @@ function room_data(){
         // Wall 2 - hinten
         [
             0,
-            -100,
+            -150,
             1000,
             0,
             0,
             0,
             width_room,
-            height_wall_floor,
+            height_wall_floor + 100,
             "brown",
             1,
             structures[2]
@@ -51,13 +51,13 @@ function room_data(){
         // Wall 3 - rechts
         [
             1000,
-            -100,
+            -150,
             0,
             0,
             90,
             0,
             width_room,
-            height_wall_floor,
+            height_wall_floor + 100,
             "brown",
             1,
             structures[2]
@@ -77,21 +77,34 @@ function room_data(){
         //     1,
         //     structures[2]
         // ],
+        [
+            -1000,
+            -150,
+            0,
+            0,
+            90,
+            0,
+            width_room,
+            height_wall_floor + 100,
+            "brown",
+            1,
+            structures[9]
+        ],
 
         // Decke
-        // [
-        //     0,
-        //     -300,
-        //     0,
-        //     90,
-        //     0,
-        //     0,
-        //     width_room,
-        //     width_room,
-        //     "brown",
-        //     1,
-        //     structures[4]
-        // ],
+        [
+            0,
+            -400,
+            0,
+            90,
+            0,
+            0,
+            width_room,
+            width_room,
+            "#87CEEB",
+            1,
+            structures[8]
+        ],
     ];
     return my_room
 }

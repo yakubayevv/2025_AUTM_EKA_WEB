@@ -26,7 +26,7 @@ function second_floor_front_and_behind() {
         let add_wall = [
             // floor 
             [
-                -198.5 + faktor_x * x_abstand,
+                -201 + faktor_x * x_abstand,
                 95.25 - faktor_y * y_abstand,
                 0 + faktor_z * z_abstand,
                 90,
@@ -58,15 +58,15 @@ function second_floor_front_and_behind() {
                 //  hier fehlt noch eine äußere Kante hinten
                 -(width_second_floor_side_one / 2) - 198 + faktor_x * x_abstand,
                 77.5 - faktor_y * y_abstand,
-                - width_second_floor_side_one - 198 + faktor_z * z_abstand,
+                - width_second_floor_side_one / 2 + 800 + faktor_z * z_abstand,
                 0,
                 90,
                 0,
                 width_stair,
                 start_pisition_floor,
-                "brown",
+                "yellow",
                 1,
-                structures[4]
+                structures[0]
             ],
 
             // // linke Platte 
@@ -296,48 +296,3 @@ function second_floor_left_and_right() {
     }
     return allSteps;
 }
-
-
-// rechts
-// step = [
-//     [
-//         900 + faktor_x * x_abstand,
-//         -140 - faktor_y * y_abstand,
-//         - width_room / 2 + 1000 + faktor_z * z_abstand,
-//         90,
-//         0,
-//         0,
-//         200,
-//         1600,
-//         "black",
-//         1,
-//         structures[4]
-//     ],
-//     [
-//         900 + faktor_x * x_abstand,
-//         -105 - faktor_y * y_abstand,
-//         - width_room / 2 + 1000 + faktor_z * z_abstand,
-//         90,
-//         0,
-//         0,
-//         200,
-//         1600,
-//         "black",
-//         1,
-//         structures[4]
-//     ],
-//     [
-//         800 + faktor_x * x_abstand,
-//         -122.5 - faktor_y * y_abstand,
-//         - width_room / 2 + 1000 + faktor_z * z_abstand,
-//         90,
-//         90,
-//         0,
-//         35,
-//         1600,
-//         "#4169E1",
-//         1,
-//         structures[0]
-//     ],
-// ]
-// allSteps.push(...step);

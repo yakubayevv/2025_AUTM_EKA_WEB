@@ -5,54 +5,61 @@ function buildSteps() {
     let abstaende = [
         {
             x: 1,
+            y: 0,
             z: 0,
-            y: 0
         },
         {
             x: 1,
+            y: 0.5,
             z: -0.7,
-            y: 0.5
+        },
+
+        {
+            x: 1,
+            y: 1.0,
+            z: -1.22,
+        },
+        
+        {
+            x: 1,
+            y: 1.5,
+            z: -1.75,
         },
         {
             x: 1,
-            z: 0.7,
-            y: 0.5
-        },
-        {
-            x: 1,
-            z: -1.2,
-            y: 1.0
-        },
-        {
-            x: 1,
-            z: -1.7,
-            y: 1.5
-        },
-        {
-            x: 1,
+            y: 2.0,
             z: -2.25,
-            y: 2.0
+        },
+
+        // 
+        {
+            x: 1,
+            y: 0,
+            z: 0,
         },
         {
             x: 1,
-            z: 1.2,
-            y: 1.0
+            y: 0.5,
+            z: 0.7,
+        },
+
+        {
+            x: 1,
+            y: 1.0,
+            z: 1.22,
+        },
+        
+        {
+            x: 1,
+            y: 1.5,
+            z: 1.75,
         },
         {
             x: 1,
-            z: 1.2,
-            y: 1.0
-        }, // identisch zu 5 – bewusst übernommen
-        {
-            x: 1,
-            z: 1.7,
-            y: 1.5
-        },
-        {
-            x: 1,
+            y: 2.0,
             z: 2.25,
-            y: 2.0
-        }
+        },
+        
     ];
 
     for (let i = 0; i < abstaende.length; i++) {
@@ -169,60 +176,7 @@ function buildSteps() {
 }
 
 function step_handgriff() {
-    let abstaende = [
-        {
-            x: 1,
-            y: 0,
-            z: 0,
-        },
-        {
-            x: 1,
-            y: -0.5,
-            z: 0.5,
-        },
-        {
-            x: 1,
-            y: -1.0,
-            z: 1.0,
-        },
-
-        {
-            x: 1.5,
-            y: -0.5,
-            z: 0.5,
-        },
-        {
-            x: 1.5,
-            y: -1.0,
-            z: 1.0,
-        },
-    ];
-    for (let i = 0; i < abstaende.length; i++) {
-        let { x, y, z } = abstaende[i];
-
-        let x_abstand = x;
-        let y_abstand = y;
-        let z_abstand = z;
-        step = [
-            // floor 
-            [
-                200 + faktor_x * x_abstand,
-                -102 - faktor_y * y_abstand,
-                -660 + faktor_z * z_abstand,
-                0,
-                90,
-                0,
-                200,
-                95,
-                "rgba(160,160,160, 1)",
-                1,
-                structures[4]
-            ],
-        ]
-        allSteps.push(...step);
-    }
-
-
+    let abstaende = [  ];
 
     abstaende = [
         {
@@ -233,29 +187,56 @@ function step_handgriff() {
         {
             x: 1,
             y: -0.5,
-            z: -0.5,
+            z: -0.530,
         },
         {
             x: 1,
             y: -1,
-            z: -1,
+            z: -1.05,
+        },
+
+        // hinten
+        {
+            x: 1.5,
+            y: -0.5,
+            z: -0.530,
+        },
+        {
+            x: 1.5,
+            y: -1,
+            z: -1.05,
+        },
+
+
+        // Linkte Treppe
+        {
+            x: 1,
+            y: 0,
+            z: -3.5,
+        },
+        {
+            x: 1,
+            y: -0.5,
+            z: -2.97,
+        },
+        {
+            x: 1,
+            y: -1,
+            z: -2.45,
         },
 
         {
             x: 1.5,
             y: -0.5,
-            z: -0.5,
+            z: -2.97,
         },
         {
             x: 1.5,
             y: -1,
-            z: -1,
+            z: -2.45,
         },
-        // {
-        //     x: 1.5,
-        //     y: 0,
-        //     z: 0,
-        // },
+
+        
     ];
     for (let i = 0; i < abstaende.length; i++) {
         let { x, y, z } = abstaende[i];
@@ -265,11 +246,11 @@ function step_handgriff() {
         let z_abstand = z;
 
         step = [
-            // floor 
+            // Geländer 
             [
                 200 + faktor_x * x_abstand,
                 -102  - faktor_y * y_abstand,
-                660 + faktor_z * z_abstand,
+                700 + faktor_z * z_abstand,
                 0,
                 90,
                 0,
@@ -284,102 +265,71 @@ function step_handgriff() {
         ];
         allSteps.push(...step);
     }
-    abstaende = [
+
+    return allSteps
+}
+
+function step_floor_adapter(){
+    // Befestigung Treppe Boden
+    allSteps = []
+    let abstaende = [
         {
             x: 1,
             y: 0,
-            z: 0,
+            z: 0.3,
         },
     ]
-    step = [
-        [
-            600 + faktor_x * x_abstand,
-            20  - faktor_y * y_abstand,
-            660 + faktor_z * z_abstand,
-            0,
-            90,
-            0,
-            200,
-            150,
-            // "rgba(160,160,160,0.1)",
-            "rgba(160,160,160,1)",
-            1,
-            structures[3]
-        ],
-        [
-            600 + faktor_x * x_abstand,
-            45  - faktor_y * y_abstand,
-            460 + faktor_z * z_abstand,
-            0,
-            90,
-            0,
-            200,
-            100,
-            // "rgba(160,160,160,0.1)",
-            "rgba(160,160,160,1)",
-            1,
-            structures[3]
-        ],
-        [
-            600 + faktor_x * x_abstand,
-            70  - faktor_y * y_abstand,
-            260 + faktor_z * z_abstand,
-            0,
-            90,
-            0,
-            200,
-            50,
-            // "rgba(160,160,160,0.1)",
-            "rgba(160,160,160,1)",
-            1,
-            structures[3]
-        ],
+    for(let c = 0; c < 2; c++){
+        let zz = 1
+        if (c == 1){
+            zz = - 1
+        }
+        step = [
+            [
+                600 + faktor_x * x_abstand,
+                20  - faktor_y * y_abstand,
+                700 * zz + faktor_z * z_abstand ,
+                0,
+                90,
+                0,
+                200,
+                150,
+                // "rgba(160,160,160,0.1)",
+                "rgba(160,160,160,1)",
+                1,
+                structures[3]
+            ],
+            [
+                600 + faktor_x * x_abstand,
+                45  - faktor_y * y_abstand,
+                488 * zz + faktor_z * z_abstand,
+                0,
+                90,
+                0,
+                200,
+                100,
+                // "rgba(160,160,160,0.1)",
+                "rgba(160,160,160,1)",
+                1,
+                structures[3]
+            ],
+            [
+                600 + faktor_x * x_abstand,
+                70  - faktor_y * y_abstand,
+                280 * zz + faktor_z * z_abstand,
+                0,
+                90,
+                0,
+                200,
+                50,
+                // "rgba(160,160,160,0.1)",
+                "rgba(160,160,160,1)",
+                1,
+                structures[3]
+            ],
 
-
-
-        [
-            600 + faktor_x * x_abstand,
-            20  - faktor_y * y_abstand,
-            -660 + faktor_z * z_abstand,
-            0,
-            90,
-            0,
-            200,
-            150,
-            // "rgba(160,160,160,0.1)",
-            "rgba(160,160,160,1)",
-            1,
-            structures[3]
         ],
-        [
-            600 + faktor_x * x_abstand,
-            45  - faktor_y * y_abstand,
-            -460 + faktor_z * z_abstand,
-            0,
-            90,
-            0,
-            200,
-            100,
-            // "rgba(160,160,160,0.1)",
-            "rgba(160,160,160,1)",
-            1,
-            structures[3]
-        ],
-        [
-            600 + faktor_x * x_abstand,
-            70  - faktor_y * y_abstand,
-            -260 + faktor_z * z_abstand,
-            0,
-            90,
-            0,
-            200,
-            50,
-            // "rgba(160,160,160,0.1)",
-            "rgba(160,160,160,1)",
-            1,
-            structures[3]
-        ],
-    ],
-    allSteps.push(...step);
+        allSteps.push(...step);
+    }
     return allSteps
 }

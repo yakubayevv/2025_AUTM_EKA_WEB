@@ -19,6 +19,8 @@ let structures = [
         "url('textures/TemakiRailing.png')",
         "url('textures/ieks_siena_4.jpg')",
         "url('textures/grass.jpg')",
+        "url('textures/himmellandschaft.jpg')",
+        "url('textures/1_copy.jpg')",
     ]
 let x_abstand = 0
 let y_abstand = 0
@@ -80,6 +82,10 @@ add_walls = second_floor_front_and_behind()
 myRoom = [...myRoom, ...add_walls];
 
 add_walls = second_floor_left_and_right()
+myRoom = [...myRoom, ...add_walls];
+
+
+add_walls = step_floor_adapter()
 myRoom = [...myRoom, ...add_walls];
 
 add_walls = step_handgriff()
