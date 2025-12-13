@@ -101,7 +101,7 @@ function room_data(){
             0,
             width_room,
             width_room,
-            "#87CEEB",
+            lights[0],
             1,
             structures[11]
         ],
