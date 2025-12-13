@@ -272,15 +272,23 @@ function step_handgriff() {
 function step_floor_adapter(){
     // Befestigung Treppe Boden
     allSteps = []
+    let surface = structures[11]
     let abstaende = [
         {
             x: 1,
             y: 0,
             z: 0.3,
         },
+        // {
+        //     x: 1,
+        //     y: 0,
+        //     z: 1,
+        // },
     ]
+    let zz = 1
+    // for(let c = 0; c < abstaende.length; c++){
     for(let c = 0; c < 2; c++){
-        let zz = 1
+        // zz = 1
         if (c == 1){
             zz = - 1
         }
@@ -297,7 +305,7 @@ function step_floor_adapter(){
                 // "rgba(160,160,160,0.1)",
                 "rgba(160,160,160,1)",
                 1,
-                structures[11]
+                surface
             ],
             [
                 600 + faktor_x * x_abstand,
@@ -311,7 +319,7 @@ function step_floor_adapter(){
                 // "rgba(160,160,160,0.1)",
                 "rgba(160,160,160,1)",
                 1,
-                structures[11]
+                surface
             ],
             [
                 600 + faktor_x * x_abstand,
@@ -325,7 +333,7 @@ function step_floor_adapter(){
                 // "rgba(160,160,160,0.1)",
                 "rgba(160,160,160,1)",
                 1,
-                structures[11]
+                surface
             ],
 
         ],
