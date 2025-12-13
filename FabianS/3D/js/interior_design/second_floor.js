@@ -98,8 +98,7 @@ function second_floor_front_and_behind() {
                 start_pisition_floor,
                 "#0FFF50",
                 1,
-                // structures[11]
-                structures[0]
+                beleuchtung
             ],
 
 
