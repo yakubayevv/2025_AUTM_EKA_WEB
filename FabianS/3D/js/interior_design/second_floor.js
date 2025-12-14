@@ -235,7 +235,7 @@ function second_floor_left_and_right() {
     ]
 
     for (let c = 0; c < abstaende.length; c++) {
-        let {x, y, z} = abstaende[c]
+        let { x, y, z } = abstaende[c]
         x_abstand = x
         y_abstand = y
         z_abstand = z
@@ -277,7 +277,7 @@ function second_floor_left_and_right() {
                 1600,
                 "#4169E1",
                 1,
-                structures[11]
+                structures[11] 
             ],
             [
                 1000 + faktor_x * x_abstand,
@@ -295,5 +295,68 @@ function second_floor_left_and_right() {
         ]
         allSteps.push(...step);
     }
+    abstaende = [
+        {
+            x: 0,
+            y: 0.0,
+            z: 0
+        },
+    ]
+    step = [
+        [
+            2600 + faktor_x * x_abstand,
+            -140 - faktor_y * y_abstand,
+            - width_room / 2 + 1000 + faktor_z * z_abstand,
+            90,
+            90,
+            0,
+            70,
+            1600,
+            "rgba(160,160,160,1)",
+            1,
+            surface
+        ],
+        // TODO
+        // [
+        //     1700 + faktor_x * x_abstand,
+        //     -140 - faktor_y * y_abstand,
+        //     - width_room / 2 + 200 + faktor_z * z_abstand,
+        //     0,
+        //     0,
+        //     90,
+        //     70,
+        //     1400,
+        //     "rgba(160,160,160,1)",
+        //     1,
+        //     surface
+        // ],
+        // [
+        //     1700 + faktor_x * x_abstand,
+        //     -140 - faktor_y * y_abstand,
+        //     - width_room / 2 + 1800 + faktor_z * z_abstand,
+        //     0,
+        //     0,
+        //     90,
+        //     70,
+        //     1400,
+        //     "rgba(160,160,160,1)",
+        //     1,
+        //     surface
+        // ],
+        // [
+        //     1000 + faktor_x * x_abstand,
+        //     -140 - faktor_y * y_abstand,
+        //     - width_room / 2 + 1000 + faktor_z * z_abstand,
+        //     0,
+        //     90,
+        //     90,
+        //     70,
+        //     1600,
+        //     "rgba(160,160,160,1)",
+        //     1,
+        //     surface
+        // ],
+    ]
+    allSteps.push(...step);
     return allSteps;
 }

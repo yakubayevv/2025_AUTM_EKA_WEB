@@ -272,7 +272,7 @@ function step_handgriff() {
 function step_floor_adapter(){
     // Befestigung Treppe Boden
     allSteps = []
-    let surface = structures[11]
+    
     let abstaende = [
         {
             x: 1,
@@ -305,7 +305,7 @@ function step_floor_adapter(){
                 // "rgba(160,160,160,0.1)",
                 "rgba(160,160,160,1)",
                 1,
-                surface
+                structures[11]
             ],
             [
                 600 + faktor_x * x_abstand,

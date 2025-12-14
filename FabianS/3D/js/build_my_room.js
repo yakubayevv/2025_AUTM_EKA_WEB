@@ -10,21 +10,7 @@ let addition_walls = []
 let faktor_y = 100
 let faktor_x = 400
 let faktor_z = 400
-let structures = [
-        "",
-        "url('textures/floor_01.jpg')",
-        "url('textures/sandy_wall.jpg')",
-        "url('textures/stone_wall.jpg')",
-        "url('textures/wood_ceiling.jpg')",
-        "url('textures/TemakiRailing.png')",
-        "url('textures/ieks_siena_4.jpg')",
-        "url('textures/grass.jpg')",
-        "url('textures/himmellandschaft.jpg')",
-        "url('textures/1_copy.jpg')",
-        "url('textures/oldtown.jpg')",
-        "url('textures/1_copy_2.jpg')",
-        "url('textures/1_gezogen.jpg')",
-    ]
+
 let x_abstand = 0
 let y_abstand = 0
 let z_abstand = 0
