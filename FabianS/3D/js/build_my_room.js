@@ -20,11 +20,10 @@ let height_room = 2000
 let width_room = 2000
 let height_wall_floor = 400
 
-let height_stair = 200 
+let height_stair = 200
 let width_stair = 200
 
 let start_pisition_floor = 35
-
 
 
 
@@ -63,7 +62,7 @@ let steps = buildSteps();
 myRoom = [...myRoom, ...steps];
 
 
-let add_walls 
+let add_walls
 add_walls = interrior_walls()
 myRoom = [...myRoom, ...add_walls];
 
@@ -72,6 +71,9 @@ myRoom = [...myRoom, ...add_walls];
 
 add_walls = second_floor_left_and_right()
 myRoom = [...myRoom, ...add_walls];
+
+
+
 
 
 add_walls = step_floor_adapter()
@@ -100,5 +102,5 @@ function zahl_269(min, max) {
 
 function getRandomInt(min, max) {
     return Math.round(Math.random() * (max - min)) + min;
-//   return Math.floor(Math.random() * max);
+    //   return Math.floor(Math.random() * max);
 }

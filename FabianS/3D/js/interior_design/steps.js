@@ -259,7 +259,7 @@ function step_handgriff() {
                 // "rgba(160,160,160,0.1)",
                 "rgba(160,160,160,1)",
                 1,
-                structures[11]
+                railing
             ],
 
         ];
@@ -305,7 +305,7 @@ function step_floor_adapter(){
                 // "rgba(160,160,160,0.1)",
                 "rgba(160,160,160,1)",
                 1,
-                structures[11]
+                steps_hold
             ],
             [
                 600 + faktor_x * x_abstand,
@@ -319,7 +319,7 @@ function step_floor_adapter(){
                 // "rgba(160,160,160,0.1)",
                 "rgba(160,160,160,1)",
                 1,
-                surface
+                steps_hold
             ],
             [
                 600 + faktor_x * x_abstand,
@@ -333,7 +333,7 @@ function step_floor_adapter(){
                 // "rgba(160,160,160,0.1)",
                 "rgba(160,160,160,1)",
                 1,
-                surface
+                steps_hold
             ],
 
         ],

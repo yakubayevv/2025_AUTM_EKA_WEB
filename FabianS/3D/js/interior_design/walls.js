@@ -16,10 +16,11 @@ function interrior_walls(){
     let z_abstand = z;
     let step = 
     [
+        // hintere Wand
         [
             -500 + faktor_x * x_abstand,
             -20 - faktor_y * y_abstand,
-            width_room / 2 - 220 + faktor_z * z_abstand,
+            width_room / 2 - 200 + faktor_z * z_abstand,
             0,
             0,
             0,
@@ -29,47 +30,11 @@ function interrior_walls(){
             1,
             structures[4]
         ],    
+        // Vordere wand 
         [
             -500 + faktor_x * x_abstand,
             -20 - faktor_y * y_abstand,
-            - width_room / 2 + 220 + faktor_z * z_abstand,
-            0,
-            0,
-            0,
-            1400,
-            240,
-            "#a0a0a0",
-            1,
-            structures[4]
-        ],
-    ]
-    // allSteps.push(...step);
-
-
-    return allSteps;
-}
-
-function side_walls(){
-    let abstaende =  [
-        { 
-            x: 1, 
-            z: 0, 
-            y: 0 
-        },
-    ];
-    let temp = abstaende[0]
-    x = temp.x 
-    y = temp.y 
-    z = temp.z
-
-    x_abstand = x;
-    y_abstand = y;
-    z_abstand = z;
-    step = [
-        [
-            -500 + faktor_x * x_abstand,
-            -20 - faktor_y * y_abstand,
-            100 + faktor_z * z_abstand,
+            - width_room / 2 + 200 + faktor_z * z_abstand,
             0,
             0,
             0,
@@ -81,4 +46,8 @@ function side_walls(){
         ],
     ]
     allSteps.push(...step);
+
+
+    return allSteps;
 }
+

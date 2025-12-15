@@ -64,19 +64,6 @@ function room_data(){
         ],
 
         // Wall 4 - links
-        // [
-        //     -1000,
-        //     -100,
-        //     0,
-        //     0,
-        //     90,
-        //     0,
-        //     width_room,
-        //     height_wall_floor,
-        //     "brown",
-        //     1,
-        //     structures[2]
-        // ],
         [
             -1000,
             -150,

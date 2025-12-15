@@ -13,6 +13,9 @@ var structures = [
         "url('textures/oldtown.jpg')",
         "url('textures/1_copy_2.jpg')",
         "url('textures/1_gezogen.jpg')",
+        "url('textures/mauer.jpg')",
+        "url('textures/mauer_05.jpg')",
+        "url('textures/wood_ceiling.jpg')",
     ]
 var lights = [
     "#87CEEB",
@@ -23,3 +26,6 @@ var signal_light = "#0FFF50"
 // var surface_structure_light = structures[11]
 var surface = structures[11]
 var surface_structure_light = structures[12]
+
+var steps_hold = structures[3]
+var railing = structures[15]

@@ -295,6 +295,8 @@ function second_floor_left_and_right() {
         ]
         allSteps.push(...step);
     }
+
+    // Geländer
     abstaende = [
         {
             x: 0,
@@ -310,52 +312,52 @@ function second_floor_left_and_right() {
             90,
             90,
             0,
-            70,
+            90,
             1600,
-            "rgba(160,160,160,1)",
+            "rgba(160,160,160,0.01)",
             1,
-            surface
+            // surface
         ],
         // TODO
-        // [
-        //     1700 + faktor_x * x_abstand,
-        //     -140 - faktor_y * y_abstand,
-        //     - width_room / 2 + 200 + faktor_z * z_abstand,
-        //     0,
-        //     0,
-        //     90,
-        //     70,
-        //     1400,
-        //     "rgba(160,160,160,1)",
-        //     1,
-        //     surface
-        // ],
-        // [
-        //     1700 + faktor_x * x_abstand,
-        //     -140 - faktor_y * y_abstand,
-        //     - width_room / 2 + 1800 + faktor_z * z_abstand,
-        //     0,
-        //     0,
-        //     90,
-        //     70,
-        //     1400,
-        //     "rgba(160,160,160,1)",
-        //     1,
-        //     surface
-        // ],
-        // [
-        //     1000 + faktor_x * x_abstand,
-        //     -140 - faktor_y * y_abstand,
-        //     - width_room / 2 + 1000 + faktor_z * z_abstand,
-        //     0,
-        //     90,
-        //     90,
-        //     70,
-        //     1600,
-        //     "rgba(160,160,160,1)",
-        //     1,
-        //     surface
-        // ],
+        [
+            1700 + faktor_x * x_abstand,
+            -140 - faktor_y * y_abstand,
+            - width_room / 2 + 200 + faktor_z * z_abstand,
+            0,
+            0,
+            90,
+            90,
+            1400,
+            "rgba(160,160,160,0.01)",
+            1,
+            // surface
+        ],
+        [
+            1700 + faktor_x * x_abstand,
+            -140 - faktor_y * y_abstand,
+            - width_room / 2 + 1800 + faktor_z * z_abstand,
+            0,
+            0,
+            90,
+            90,
+            1400,
+            "rgba(160,160,160,0.01)",
+            1,
+            // surface
+        ],
+        [
+            1000 + faktor_x * x_abstand,
+            -140 - faktor_y * y_abstand,
+            - width_room / 2 + 1000 + faktor_z * z_abstand,
+            0,
+            90,
+            90,
+            90,
+            1600,
+            "rgba(160,160,160,0.01)",
+            1,
+            // surface
+        ],
     ]
     allSteps.push(...step);
     return allSteps;
