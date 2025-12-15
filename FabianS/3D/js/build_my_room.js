@@ -66,6 +66,13 @@ let add_walls
 add_walls = interrior_walls()
 myRoom = [...myRoom, ...add_walls];
 
+
+// add_walls = bruecken()
+// myRoom = [...myRoom, ...add_walls];
+
+// add_walls = wuerfel()
+// myRoom = [...myRoom, ...add_walls];
+
 add_walls = second_floor_front_and_behind()
 myRoom = [...myRoom, ...add_walls];
 

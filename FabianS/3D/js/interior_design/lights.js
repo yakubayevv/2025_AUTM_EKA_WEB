@@ -24,8 +24,11 @@ var lights = [
 
 var signal_light = "#0FFF50"
 // var surface_structure_light = structures[11]
-var surface = structures[11]
+var surface_light = structures[11]
 var surface_structure_light = structures[12]
+
+var floor = structures[3]
+
 
 var steps_hold = structures[3]
 var railing = structures[15]
