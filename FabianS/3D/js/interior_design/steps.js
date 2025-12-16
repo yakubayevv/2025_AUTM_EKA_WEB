@@ -114,7 +114,7 @@ function buildSteps() {
                 0,
                 width_stair + (temp),
                 start_pisition_floor,
-                "brown",
+                lights[1],
                 1,
                 structures[0]
             ],
@@ -145,7 +145,7 @@ function buildSteps() {
                 0,
                 width_stair,
                 start_pisition_floor,
-                "#0FFF50",
+                lights[1],
                 1,
                 structures[0]
             ],

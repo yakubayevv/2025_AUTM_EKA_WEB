@@ -138,6 +138,8 @@ function update(){
             )
         `; 
     }
+
+    // interactTeleport(spelesElementi[level][2], izvObj)
 }
 
 
@@ -148,11 +150,11 @@ let game = setInterval(
 );
 if(jump){
     pawn = new player(
+        550,
         0,
         0,
         0,
-        0,
-        0,// Rotation um y
+        -90,// Rotation um y
         7,
         7,
         7
