@@ -528,3 +528,209 @@ function wuerfel() {
     }
     return allSteps
 }
+
+
+
+
+function tunnel() {
+    allSteps = []
+    abstaende = [
+        {
+            x: 1,
+            y: 1,
+            z: 1
+        },
+    ]
+    for (let c = 0; c < abstaende.length; c++) {
+        step = [
+            [
+                -100 + faktor_x * x_abstand,
+                -50 - faktor_y * y_abstand,
+                - width_room / 2 + 350 + faktor_z * z_abstand,
+                90,
+                0,
+                0,
+                1400,
+                300,
+                "rgba(160,160,160,1)",
+                1,
+                floor
+            ],
+            [
+                -100 + faktor_x * x_abstand,
+                -70 - faktor_y * y_abstand,
+                - width_room / 2 + 350 + faktor_z * z_abstand,
+                90,
+                0,
+                0,
+                1400,
+                300,
+                "rgba(160,160,160,1)",
+                1,
+                floor
+            ],
+            [
+                -100 + faktor_x * x_abstand,
+                -60 - faktor_y * y_abstand,
+                - width_room / 2 + 500 + faktor_z * z_abstand,
+                0,
+                0,
+                0,
+                1400,
+                21,
+                "rgba(0,0,160,1)",
+                1,
+                floor
+            ],
+            [
+                -800 + faktor_x * x_abstand,
+                -60 - faktor_y * y_abstand,
+                - width_room / 2 + 350 + faktor_z * z_abstand,
+                0,
+                90,
+                0,
+                300,
+                20,
+                "rgba(0,0,160,1)",
+                1,
+                floor
+            ],
+            [
+                - 400 + faktor_x * x_abstand,
+                22 - faktor_y * y_abstand,
+                - width_room / 2 + 500 + faktor_z * z_abstand,
+                0,
+                0,
+                0,
+                800,
+                142,
+                "rgba(160,160,160,1)",
+                1,
+                floor
+            ],
+            [
+                - 400 + faktor_x * x_abstand,
+                22 - faktor_y * y_abstand,
+                - width_room / 2 + 480 + faktor_z * z_abstand,
+                0,
+                0,
+                0,
+                800,
+                142,
+                "rgba(0,0,160,1)",
+                1,
+                floor
+            ],
+            [
+                - 800 + faktor_x * x_abstand,
+                21.5 - faktor_y * y_abstand,
+                - width_room / 2 + 490 + faktor_z * z_abstand,
+                0,
+                90,
+                90,
+                143,
+                20,
+                "rgba(0,0,160,1)",
+                1,
+                floor
+            ],
+            [
+                0 + faktor_x * x_abstand,
+                21.5 - faktor_y * y_abstand,
+                - width_room / 2 + 490 + faktor_z * z_abstand,
+                0,
+                90,
+                90,
+                143,
+                20,
+                "rgba(0,0,160,1)",
+                1,
+                floor
+            ],
+            [
+                100 + faktor_x * x_abstand,
+                21.5 - faktor_y * y_abstand,
+                - width_room / 2 + 490 + faktor_z * z_abstand,
+                0,
+                90,
+                90,
+                143,
+                20,
+                "rgba(0,0,160,1)",
+                1,
+                floor
+            ],
+
+            [
+                350 + faktor_x * x_abstand,
+                22 - faktor_y * y_abstand,
+                - width_room / 2 + 500 + faktor_z * z_abstand,
+                0,
+                0,
+                0,
+                500,
+                142,
+                "rgba(0,0,160,1)",
+                1,
+                floor
+            ],
+            [
+                350 + faktor_x * x_abstand,
+                22 - faktor_y * y_abstand,
+                - width_room / 2 + 480 + faktor_z * z_abstand,
+                0,
+                0,
+                0,
+                500,
+                142,
+                "rgba(0,0,160,1)",
+                1,
+                floor
+            ],
+
+
+            // [
+            //     50 + faktor_x * x_abstand,
+            //     -50 - faktor_y * y_abstand,
+            //     - width_room / 2 + 750 + faktor_z * z_abstand,
+            //     90,
+            //     0,
+            //     0,
+            //     100,
+            //     500,
+            //     "rgba(0,0,160,1)",
+            //     1,
+            //     // floor
+            // ],
+            // [
+            //     0 + faktor_x * x_abstand,
+            //     25 - faktor_y * y_abstand,
+            //     - width_room / 2 + 750 + faktor_z * z_abstand,
+            //     90,
+            //     90,
+            //     0,
+            //     150,
+            //     500,
+            //     "rgba(0,0,160,1)",
+            //     1,
+            //     // floor
+            // ],
+            // [
+            //     100 + faktor_x * x_abstand,
+            //     25 - faktor_y * y_abstand,
+            //     - width_room / 2 + 750 + faktor_z * z_abstand,
+            //     90,
+            //     90,
+            //     0,
+            //     150,
+            //     500,
+            //     "rgba(0,0,160,1)",
+            //     1,
+            //     // floor
+            // ],
+        ]
+        console.log("Brücke")
+        allSteps.push(...step);
+    }
+    return allSteps
+}

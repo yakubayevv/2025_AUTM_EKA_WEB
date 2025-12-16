@@ -73,6 +73,10 @@ myRoom = [...myRoom, ...add_walls];
 // add_walls = wuerfel()
 // myRoom = [...myRoom, ...add_walls];
 
+
+add_walls = tunnel()
+myRoom = [...myRoom, ...add_walls];
+
 add_walls = second_floor_front_and_behind()
 myRoom = [...myRoom, ...add_walls];
 
