@@ -195,17 +195,7 @@ function step_handgriff() {
             z: -1.05,
         },
 
-        // hinten
-        {
-            x: 1.5,
-            y: -0.5,
-            z: -0.530,
-        },
-        {
-            x: 1.5,
-            y: -1,
-            z: -1.05,
-        },
+     
 
 
         // Linkte Treppe
@@ -236,6 +226,17 @@ function step_handgriff() {
             z: -2.45,
         },
 
+        // hinten
+        {
+            x: 1.5,
+            y: -0.5,
+            z: -0.530,
+        },
+        {
+            x: 1.5,
+            y: -1,
+            z: -1.05,
+        },
         
     ];
     for (let i = 0; i < abstaende.length; i++) {
@@ -266,6 +267,138 @@ function step_handgriff() {
         allSteps.push(...step);
     }
 
+    for (let i = 0; i < 6; i++) {
+        let { x, y, z } = abstaende[i];
+
+        let x_abstand = x;
+        let y_abstand = y;
+        let z_abstand = z;
+        step = [
+            [
+                210 + faktor_x * x_abstand,
+                -120  - faktor_y * y_abstand,
+                700 + faktor_z * z_abstand,
+                0,
+                90,
+                0,
+                200,
+                60,
+                // "rgba(160,160,160,0.1)",
+                "rgba(0,0,160,1)",
+                1,
+                railing
+            ],
+            [
+                205 + faktor_x * x_abstand,
+                -150  - faktor_y * y_abstand,
+                700 + faktor_z * z_abstand,
+                90,
+                0,
+                90,
+                200,
+                10,
+                // "rgba(160,160,160,0.1)",
+                "rgba(0,0,160,1)",
+                1,
+                railing
+            ],
+            [
+                205 + faktor_x * x_abstand,
+                -120  - faktor_y * y_abstand,
+                600 + faktor_z * z_abstand,
+                0,
+                0,
+                0,
+                10,
+                60,
+                // "rgba(160,160,160,0.1)",
+                "rgba(0,0,160,1)",
+                1,
+                railing
+            ],
+            [
+                205 + faktor_x * x_abstand,
+                -120  - faktor_y * y_abstand,
+                800 + faktor_z * z_abstand,
+                0,
+                0,
+                0,
+                10,
+                60,
+                // "rgba(160,160,160,0.1)",
+                "rgba(0,0,160,1)",
+                1,
+                railing
+            ],
+        ]
+        allSteps.push(...step);
+    }
+    for (let i = 6; i < abstaende.length; i++) {
+        let { x, y, z } = abstaende[i];
+
+        let x_abstand = x;
+        let y_abstand = y;
+        let z_abstand = z;
+        step = [
+            [
+                190 + faktor_x * x_abstand,
+                -120  - faktor_y * y_abstand,
+                700 + faktor_z * z_abstand,
+                0,
+                90,
+                0,
+                200,
+                60,
+                // "rgba(160,160,160,0.1)",
+                "rgba(0,0,160,1)",
+                1,
+                railing
+            ],
+            [
+                195 + faktor_x * x_abstand,
+                -150  - faktor_y * y_abstand,
+                700 + faktor_z * z_abstand,
+                90,
+                0,
+                90,
+                200,
+                10,
+                // "rgba(160,160,160,0.1)",
+                "rgba(0,0,160,1)",
+                1,
+                railing
+            ],
+            [
+                195 + faktor_x * x_abstand,
+                -120  - faktor_y * y_abstand,
+                600 + faktor_z * z_abstand,
+                0,
+                0,
+                0,
+                10,
+                60,
+                // "rgba(160,160,160,0.1)",
+                "rgba(0,0,160,1)",
+                1,
+                railing
+            ],
+            [
+                195 + faktor_x * x_abstand,
+                -120  - faktor_y * y_abstand,
+                800 + faktor_z * z_abstand,
+                0,
+                0,
+                0,
+                10,
+                60,
+                // "rgba(160,160,160,0.1)",
+                "rgba(0,0,160,1)",
+                1,
+                railing
+            ],
+        ]
+        allSteps.push(...step);
+    }
     return allSteps
 }
 
