@@ -5,7 +5,7 @@ function buildSteps() {
     let abstaende = [
         {
             x: 1,
-            y: 0,
+            y: -0.05,
             z: 0,
         },
         {
@@ -31,12 +31,6 @@ function buildSteps() {
             z: -2.25,
         },
 
-        // 
-        {
-            x: 1,
-            y: 0,
-            z: 0,
-        },
         {
             x: 1,
             y: 0.5,
@@ -434,12 +428,14 @@ function step_floor_adapter(){
                 90,
                 0,
                 200,
-                150,
+                160,
                 // "rgba(160,160,160,0.1)",
                 "rgba(160,160,160,1)",
                 1,
                 steps_hold
             ],
+
+
             [
                 600 + faktor_x * x_abstand,
                 45  - faktor_y * y_abstand,
@@ -448,7 +444,7 @@ function step_floor_adapter(){
                 90,
                 0,
                 200,
-                100,
+                110,
                 // "rgba(160,160,160,0.1)",
                 "rgba(160,160,160,1)",
                 1,
@@ -462,7 +458,7 @@ function step_floor_adapter(){
                 90,
                 0,
                 200,
-                50,
+                60,
                 // "rgba(160,160,160,0.1)",
                 "rgba(160,160,160,1)",
                 1,

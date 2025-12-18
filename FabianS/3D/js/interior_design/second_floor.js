@@ -314,24 +314,27 @@ function second_floor_left_and_right() {
             0,
             90,
             1600,
+            // "rgba(160,160,160,1)",
             "rgba(160,160,160,0.01)",
             1,
             // surface_light
         ],
-        // TODO
-        [
-            1700 + faktor_x * x_abstand,
-            -140 - faktor_y * y_abstand,
-            - width_room / 2 + 200 + faktor_z * z_abstand,
-            0,
-            0,
-            90,
-            90,
-            1400,
-            "rgba(160,160,160,0.01)",
-            1,
-            // surface_light
-        ],
+        // rechts
+        // [
+        //     // Einkommentieren wenn Tunnel weg ist
+        //     1700 + faktor_x * x_abstand,
+        //     -140 - faktor_y * y_abstand,
+        //     - width_room / 2 + 200 + faktor_z * z_abstand,
+        //     0,
+        //     0,
+        //     90,
+        //     90,
+        //     1400,
+        //     // "rgba(160,160,160,1)",
+        //     "rgba(160,160,160,0.01)",
+        //     1,
+        //     // surface_light
+        // ],
         [
             1700 + faktor_x * x_abstand,
             -140 - faktor_y * y_abstand,
@@ -341,6 +344,7 @@ function second_floor_left_and_right() {
             90,
             90,
             1400,
+            // "rgba(160,160,160, 1)",
             "rgba(160,160,160,0.01)",
             1,
             // surface_light
@@ -348,16 +352,32 @@ function second_floor_left_and_right() {
         [
             1000 + faktor_x * x_abstand,
             -140 - faktor_y * y_abstand,
-            - width_room / 2 + 1000 + faktor_z * z_abstand,
+            - width_room / 2 + 1150 + faktor_z * z_abstand,
             0,
             90,
             90,
             90,
-            1600,
+            1300,
+            // "rgba(160,160,160,1)",
             "rgba(160,160,160,0.01)",
             1,
             // surface_light
         ],
+        // [
+        //     // Einkommentieren wenn Tunnel weg ist
+        //     1000 + faktor_x * x_abstand,
+        //     -140 - faktor_y * y_abstand,
+        //     - width_room / 2 + 350 + faktor_z * z_abstand,
+        //     0,
+        //     90,
+        //     90,
+        //     90,
+        //     300,
+        //     // "rgba(160,160,160,1)",
+        //     "rgba(160,160,160,0.01)",
+        //     1,
+        //     // surface_light
+        // ],
     ]
     allSteps.push(...step);
     return allSteps;
@@ -696,7 +716,7 @@ function tunnel() {
                 0,
                 1400,
                 60,
-                "rgba(0,0,160,0.01)",
+                "rgba(251, 251, 251, 0.001)",
                 1,
                 // floor
             ],

@@ -29,6 +29,45 @@ function interrior_walls(){
             "#a0a0a0",
             1,
             structures[4]
+        ],
+                [
+            -500 + faktor_x * x_abstand,
+            -20 - faktor_y * y_abstand,
+            width_room / 2 - 180 + faktor_z * z_abstand,
+            0,
+            0,
+            0,
+            1400,
+            240,
+            "#a0a0a0",
+            1,
+            structures[4]
+        ],
+        [
+            -1200 + faktor_x * x_abstand,
+            0 - faktor_y * y_abstand,
+            width_room / 2 - 190 + faktor_z * z_abstand,
+            90,
+            90,
+            90,
+            20,
+            205,
+            "#a0a0a0",
+            1,
+            // structures[4]
+        ],
+        [
+            200 + faktor_x * x_abstand,
+            0 - faktor_y * y_abstand,
+            width_room / 2 - 190 + faktor_z * z_abstand,
+            90,
+            90,
+            90,
+            20,
+            205,
+            "#a0a0a0",
+            1,
+            structures[4]
         ],    
         // Vordere wand 
         [
@@ -40,6 +79,45 @@ function interrior_walls(){
             0,
             1400,
             240,
+            "#a0a0a0",
+            1,
+            structures[4]
+        ],
+        [
+            -500 + faktor_x * x_abstand,
+            -20 - faktor_y * y_abstand,
+            - width_room / 2 + 180 + faktor_z * z_abstand,
+            0,
+            0,
+            0,
+            1400,
+            240,
+            "#a0a0a0",
+            1,
+            structures[4]
+        ],
+        [
+            -1200 + faktor_x * x_abstand,
+            0 - faktor_y * y_abstand,
+            - width_room / 2 + 190 + faktor_z * z_abstand,
+            90,
+            90,
+            90,
+            20,
+            205,
+            "#a0a0a0",
+            1,
+            structures[4]
+        ],
+        [
+            200 + faktor_x * x_abstand,
+            0 - faktor_y * y_abstand,
+            - width_room / 2 + 190 + faktor_z * z_abstand,
+            90,
+            90,
+            90,
+            20,
+            205,
             "#a0a0a0",
             1,
             structures[4]
