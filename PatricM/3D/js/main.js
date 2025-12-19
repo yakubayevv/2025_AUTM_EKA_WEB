@@ -130,15 +130,18 @@ function update() {
     document.onclick = function () {
         if (lock) {
             myBullets.push(drawMyBullet(myBulletNumber));
-            myBulletsData.push(new player(pawn.x, pawn.y, pawn.z, pawn.rx, pawn.ry, 0, 0, 0));
+            myBulletsData.push(new player(pawn.x, pawn.y, pawn.z, pawn.rx, pawn.ry, 5, 5, 5));
             myBulletNumber++;
         }
     }
 
     for (let i = 0; i < myBullets.length; i++) {
-        dx = 5;
+        dzb = +(myBulletsData[i].vx) * Math.sin((myBulletsData[i].ry - 45) * DEG) - (myBulletsData[i].vz) * Math.cos((myBulletsData[i].ry - 45) * DEG);
+        dxb = +(myBulletsData[i].vx) * Math.cos((myBulletsData[i].ry - 45) * DEG) + (myBulletsData[i].vz) * Math.sin((myBulletsData[i].ry - 45) * DEG);
 
-        myBulletsData[i].x += dx;
+        myBulletsData[i].x += dxb;
+        myBulletsData[i].z += dzb;
+        // myBulletsData[i].ry += 45; (SPIN)
 
         myBullets[i].style.transform = `translate3d(${600 + myBulletsData[i].x - 25}px, ${400 + myBulletsData[i].y - 25}px, ${myBulletsData[i].z}px) rotateX(${myBulletsData[i].rx}deg) rotateY(${-myBulletsData[i].ry}deg)`;
     }
